@@ -17,6 +17,7 @@ $configurator->onCompile[] = function (ExtraConfigurator $configurator, Compiler
 // According to NETTE_DEBUG env
 $configurator->setEnvDebugMode();
 
+$configurator->setDebugMode(true);
 // Enable tracy and configure it
 $configurator->enableTracy(__DIR__ . '/../var/log');
 Debugger::$errorTemplate = __DIR__ . '/resources/tracy/500.phtml';

@@ -2,7 +2,9 @@
 
 namespace App\Modules\Admin\User;
 
-class UserPresenter
+use App\Modules\Admin\BaseAdminPresenter;
+
+class UserPresenter extends BaseAdminPresenter
 {
 
 }

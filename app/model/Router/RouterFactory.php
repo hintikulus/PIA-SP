@@ -15,7 +15,7 @@ final class RouterFactory
 		$this->buildMailing($router);
 		$this->buildPdf($router);
 		$this->buildAdmin($router);
-		$this->buildFront($router);
+		//$this->buildFront($router);
 
 		return $router;
 	}
@@ -23,18 +23,20 @@ final class RouterFactory
 	protected function buildAdmin(RouteList $router): RouteList
 	{
 		$router[] = $list = new RouteList('Admin');
-		$list[] = new Route('admin/<presenter>/<action>[/<id>]', 'Home:default');
-
-		return $router;
-	}
-
-	protected function buildFront(RouteList $router): RouteList
-	{
-		$router[] = $list = new RouteList('Front');
 		$list[] = new Route('<presenter>/<action>[/<id>]', 'Home:default');
 
 		return $router;
 	}
+
+	/*
+	protected function buildFront(RouteList $router): RouteList
+	{
+		$router[] = $list = new RouteList('Web');
+		$list[] = new Route('<presenter>/<action>[/<id>]', 'Home:default');
+
+		return $router;
+	}
+	*/
 
 	protected function buildMailing(RouteList $router): RouteList
 	{
