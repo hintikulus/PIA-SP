@@ -111,6 +111,10 @@
       <path value="$PROJECT_DIR$/vendor/contributte/tracy" />
       <path value="$PROJECT_DIR$/vendor/contributte/cache" />
       <path value="$PROJECT_DIR$/vendor/contributte/security" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/contributte/translation" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0">

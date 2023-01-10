@@ -21,7 +21,7 @@ services:
 		setup:
 			- setNamespace("Webapp")
 
-	security.passwords: App\Model\Security\Passwords
+	securitFy.passwords: App\Model\Security\Passwords
 	security.user: App\Model\Security\SecurityUser
 	security.authenticator: App\Model\Security\Authenticator\UserAuthenticator
 	security.authorizator: App\Model\Security\Authorizator\StaticAuthorizator
