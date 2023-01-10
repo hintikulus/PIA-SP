@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: php-apache
+    image: thecodingmachine/php:8.0-v4-apache
+    volumes:
+      - ./:/__app__
+    ports:
+      - 1234:80
+    links:
+      - db
+    environment:
+      APACHE_DOCUMENT_ROOT: /__app__/www/
+
+  db:
+    image: mysql:latest
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: quickstart
+    volumes:
+      - ./sql/create.sql:/docker-entrypoint-initdb.d/create.sql
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: wakimide
+      PMA_HOST: db
