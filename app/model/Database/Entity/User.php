@@ -8,6 +8,7 @@ use App\Model\Database\Entity\Attributes\TUpdatedAt;
 use App\Model\Exception\Logic\InvalidArgumentException;
 use App\Model\Security\Identity;
 use App\Model\Utils\DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,9 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends AbstractEntity
 {
-
-	public const ROLE_ADMIN = 'admin';
 	public const ROLE_USER = 'user';
+	public const ROLE_DEPARTMENT_MANAGER = "department_manager";
+	public const ROLE_SECRETARIAT = "secretariat";
 
 	public const STATE_FRESH = 1;
 	public const STATE_ACTIVATED = 2;
@@ -73,6 +74,11 @@ class User extends AbstractEntity
 	 */
 	private $lastLoggedAt;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Project", mappedBy="project", cascade={"persist"})
+	 */
+	private $managedProjects;
+
 	public function __construct(string $firstname, string $lastname, string $email, string $login, string $passwordHash)
 	{
 		$this->firstname = $firstname;
@@ -82,6 +88,8 @@ class User extends AbstractEntity
 		$this->password = $passwordHash;
 
 		$this->role = self::ROLE_USER;
+
+		$this->managedProjects = new \Doctrine\Common\Collections\ArrayCollection();
 		//$this->state = self::STATE_FRESH;
 	}
 

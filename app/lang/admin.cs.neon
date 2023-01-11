@@ -1,1 +1,6 @@
 appName: "Název aplikace"
+
+role:
+	secretariat: 'Sekretariát'
+	department_manager: 'Vedoucí oddělení'
+	user: 'Zaměstnanec'

@@ -17,10 +17,15 @@ abstract class BaseAdminPresenter extends SecuredPresenter
 	{
 		parent::checkRequirements($element);
 
+		$resource = $this->getRequest()->getPresenterName() . ($this->getAction() != "default" ? ":" . $this->getAction() : "");
+		if (!$this->user->isAllowed($resource)) {
+			$this->flashError('You cannot access this with user role');
+			$this->redirect(App::DESTINATION_ADMIN_HOMEPAGE);
+		}
+
 		if (!$this->user->isAllowed('Admin:Home')) {
 			$this->flashError('You cannot access this with user role');
-			bdump("NO PERM");
-			$this->redirect(App::DESTINATION_FRONT_HOMEPAGE);
+			$this->redirect(App::DESTINATION_ADMIN_HOMEPAGE);
 		}
 	}
 

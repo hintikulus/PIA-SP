@@ -8,6 +8,6 @@ class BaseGrid extends DataGrid
 {
 	public function __construct() {
 		parent::__construct();
-		$this->setTemplateFile(__DIR__ . '/template.latte');
+		$this->setTemplateFile(__DIR__ . '/templates/template.latte');
 	}
 }

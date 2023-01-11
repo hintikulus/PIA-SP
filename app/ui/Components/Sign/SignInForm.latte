@@ -1,28 +1,25 @@
 <form n:name="form" class="form-signin">
-	<div class="text-center mb-4">
-		<img class="mb-4" src="https://avatars0.githubusercontent.com/u/99965?s=200&v=4" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Webapp Skeleton Admin</h1>
-	</div>
-
-	<div n:foreach="$form->errors as $error" class="alert alert-danger" role="alert">
+		<div n:foreach="$form->errors as $error" class="alert alert-danger" role="alert">
 		{$error}
 	</div>
 
-	<div class="form-label-group">
-		<input type="email" n:name="email" class="form-control" placeholder="Email address" required autofocus>
-		<label n:name="email">Email address</label>
+	<label n:name="email">Přihlašovací jméno</label>
+	<div class="mb-3">
+		<input type="email" n:name="email" class="form-control" placeholder="Přihlašovací jméno" required autofocus>
 	</div>
 
-	<div class="form-label-group">
+	<label n:name="password">Heslo</label>
+	<div class="mb-3">
 		<input type="password" n:name="password" class="form-control" placeholder="Password" required>
-		<label n:name="password">Password</label>
 	</div>
 
-	<div class="checkbox mb-3">
-		<label>
-			<input n:name="remember" type="checkbox"> Remember me
-		</label>
+	<div class="form-check form-switch">
+		<input class="form-check-input" type="checkbox" n:name="remember" id="rememberMe" checked="">
+		<label class="form-check-label" n:name="remember">Zapamatovat si mě</label>
 	</div>
-	<button n:name="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+
+	<div class="text-center">
+	<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Přihlásit</button>
+	</div>
 	<p class="mt-5 mb-3 text-muted text-center">&copy; {=date('Y')}</p>
 </form>

@@ -8,7 +8,6 @@ use Nettrine\ORM\EntityManagerDecorator;
 
 class EntityManager extends EntityManagerDecorator
 {
-
 	use TRepositories;
 
 	/**

@@ -3,6 +3,8 @@
 namespace App\Model\Database;
 
 use App\Model\Database\Entity\User;
+use App\Model\Database\Entity\Project;
+use App\Model\Database\Repository\ProjectRepository;
 use App\Model\Database\Repository\UserRepository;
 
 /**
@@ -10,6 +12,10 @@ use App\Model\Database\Repository\UserRepository;
  */
 trait TRepositories
 {
+	public function getProjectRepository(): ProjectRepository
+	{
+		return $this->getRepository(Project::class);
+	}
 
 	public function getUserRepository(): UserRepository
 	{

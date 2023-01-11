@@ -23,7 +23,9 @@ final class StaticAuthorizator extends Permission
 	 */
 	protected function addRoles(): void
 	{
-		$this->addRole(User::ROLE_ADMIN);
+		$this->addRole(User::ROLE_USER);
+		$this->addRole(User::ROLE_DEPARTMENT_MANAGER);
+		$this->addRole(User::ROLE_SECRETARIAT);
 	}
 
 	/**
@@ -31,7 +33,17 @@ final class StaticAuthorizator extends Permission
 	 */
 	protected function addResources(): void
 	{
-		$this->addResource('Admin:Home');
+		// MODUL
+		$this->addResource('Admin');
+
+		// HLAVNI ENTITY
+		$this->addResource('Admin:Home', 'Admin');
+		$this->addResource('Admin:User', 'Admin');
+		$this->addResource('Admin:Project', 'Admin');
+
+		// PODAKCE
+		$this->addResource('Admin:User:list', 'Admin:User');
+		$this->addResource('Admin:Project:list', 'Admin:Project');
 	}
 
 	/**
@@ -39,8 +51,18 @@ final class StaticAuthorizator extends Permission
 	 */
 	protected function addPermissions(): void
 	{
-		$this->allow(User::ROLE_ADMIN, [
+		$this->allow(User::ROLE_USER, [
 			'Admin:Home',
+		]);
+
+		$this->allow(User::ROLE_DEPARTMENT_MANAGER, [
+			'Admin:Home',
+		]);
+
+		$this->allow(User::ROLE_SECRETARIAT, [
+			'Admin:Home',
+			'Admin:User',
+			'Admin'
 		]);
 	}
 

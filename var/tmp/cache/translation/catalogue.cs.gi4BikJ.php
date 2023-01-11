@@ -6,6 +6,9 @@ $catalogue = new MessageCatalogue('cs', array (
   'admin' => 
   array (
     'appName' => 'Název aplikace',
+    'role.secretariat' => 'Sekretariát',
+    'role.department_manager' => 'Vedoucí oddělení',
+    'role.user' => 'Zaměstnanec',
   ),
 ));
 

@@ -3,6 +3,7 @@
 services:
 	# Forms
 	- App\UI\Form\FormFactory
+	- App\UI\Components\Project\ProjectGridFactory
 	- App\UI\Components\Sign\SignInFormFactory
 	- App\UI\Components\User\UserGridFactory
 
