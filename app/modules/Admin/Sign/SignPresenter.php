@@ -5,9 +5,10 @@ namespace App\Modules\Admin\Sign;
 use App\Model\App;
 use App\Model\Exception\Runtime\AuthenticationException;
 use App\Modules\Admin\BaseAdminPresenter;
+use App\UI\Components\Sign\SignInFormFactory;
 use App\UI\Form\BaseForm;
-use App\UI\Form\FormFactory;
 use Nette\Application\UI\ComponentReflection;
+use Nette\Application\UI\Control;
 
 final class SignPresenter extends BaseAdminPresenter
 {
@@ -15,8 +16,8 @@ final class SignPresenter extends BaseAdminPresenter
 	/** @var string @persistent */
 	public $backlink;
 
-	/** @var FormFactory @inject */
-	public $formFactory;
+	/** @var SignInFormFactory @inject */
+	public $signInFormFactory;
 
 	/**
 	 * @param ComponentReflection|mixed $element
@@ -43,6 +44,11 @@ final class SignPresenter extends BaseAdminPresenter
 		$this->redirect(App::DESTINATION_AFTER_SIGN_OUT);
 	}
 
+	protected function createComponentLoginForm(): Control {
+		$form = $this->signInFormFactory->forBackend();
+		return $form;
+	}
+/*
 	protected function createComponentLoginForm(): BaseForm
 	{
 		$form = $this->formFactory->forBackend();
@@ -57,7 +63,7 @@ final class SignPresenter extends BaseAdminPresenter
 
 		return $form;
 	}
-
+*/
 	public function processLoginForm(BaseForm $form): void
 	{
 		try {

@@ -3,10 +3,14 @@
 services:
 	# Forms
 	- App\UI\Form\FormFactory
+	- App\UI\Components\Sign\SignInFormFactory
+	- App\UI\Components\User\UserGridFactory
 
 
 	# Latte/Templates
 	latte.latteFactory:
+
+
 		setup:
 			- addFilter(datetime, App\Model\Latte\Filters::datetime)
 			- addFilter(neon, App\Model\Latte\Filters::neon)
@@ -38,7 +42,6 @@ services:
 	- App\Domain\User\CreateUserFacade
 #	- App\Domain\Order\OrderLogSubscriber
 #	- App\Domain\Http\RequestLoggerSubscriber
-
 
 	# Console ================
 	- {class: App\Model\Console\HelloCommand, tags: {console.command: hello}}
