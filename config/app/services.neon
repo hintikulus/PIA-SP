@@ -3,9 +3,13 @@
 services:
 	# Forms
 	- App\UI\Form\FormFactory
+	- App\UI\Components\UserSettings\PasswordChangeFormFactory
 	- App\UI\Components\Project\ProjectGridFactory
 	- App\UI\Components\Sign\SignInFormFactory
 	- App\UI\Components\User\UserGridFactory
+	- App\UI\Components\User\UserFormFactory
+	- App\UI\Components\Workspace\WorkspaceFormFactory
+	- App\UI\Components\Workspace\WorkspaceGridFactory
 
 
 	# Latte/Templates

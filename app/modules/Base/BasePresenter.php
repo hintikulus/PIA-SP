@@ -10,6 +10,7 @@ use Contributte\Application\UI\Presenter\StructuredTemplates;
 use Contributte\Translation\LocalesResolvers\Session;
 use Nette\Application\UI\Presenter;
 use Nette\Localization\ITranslator;
+use Nette\Security\User;
 
 /**
  * @property-read TemplateProperty $template
@@ -24,9 +25,17 @@ abstract class BasePresenter extends Presenter
 	/** @var Session @inject */
 	public $translatorSessionResolver;
 
+	/** @var User @inject */
+	public $user;
+
 	use StructuredTemplates;
 	use TFlashMessage;
 	use TModuleUtils;
+
+	public function beforeRender()
+	{
+		$this->template->user = $this->user;
+	}
 
 	public function handleChangeLocale(string $locale): void
 	{

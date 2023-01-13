@@ -2,13 +2,30 @@
 
 namespace App\UI\Components\Base;
 
+use App\Model\Database\EntityManager;
+use Contributte\Translation\Translator;
 use Nette\Application\UI\Control;
+use Nette\Security\User;
 
 class BaseComponent extends Control
 {
 	private ?string $componentName = null;
 	private ?string $componentNameWithPath = null;
 	protected ?string $latteFile = null;
+
+	protected EntityManager $em;
+	protected User $user;
+	protected Translator $translator;
+
+	public function __construct(
+		EntityManager $em,
+		User $user,
+		Translator $translator
+	) {
+		$this->em = $em;
+		$this->user = $user;
+		$this->translator = $translator;
+	}
 
 	public function render($params = null)
 	{

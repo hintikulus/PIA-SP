@@ -1,6 +1,27 @@
 appName: "Název aplikace"
 
+base:
+	add: 'Přidat'
+	edit: 'Upravit'
+	deleteConfirm: 'Opravdu chcete odstranit záznam?'
+
 role:
 	secretariat: 'Sekretariát'
 	department_manager: 'Vedoucí oddělení'
 	user: 'Zaměstnanec'
+
+user:
+	menu: 'Lidé'
+
+workspace:
+	menu: 'Pracovní skupiny'
+	title: 'Pracovní skupina'
+	title_multiple: 'Pracovní skupiny'
+
+	attributes:
+		name: 'Název'
+		shortcut: 'Zkratka'
+
+	form:
+		title_add: 'Přidat pracovní skupinu'
+		title_edit: 'Upravit pracovní skupinu'

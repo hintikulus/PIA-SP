@@ -2,21 +2,19 @@
 
 namespace App\UI\Components\Sign;
 
+use App\Model\Database\EntityManager;
+use App\UI\Components\Base\BaseFactoryTrait;
 use App\UI\Form\BaseForm;
+use Contributte\Translation\Translator;
 use Nette\Security\User;
 
 class SignInFormFactory
 {
-
-	private User $user;
-	public function __construct(User $user) {
-		$this->user = $user;
-	}
-
+	use BaseFactoryTrait;
 
 	private function create(): SignInForm
 	{
-		return new SignInForm($this->user);
+		return new SignInForm($this->em, $this->user, $this->translator);
 	}
 
 	public function forFrontend(): SignInForm

@@ -1,0 +1,29 @@
+<form n:name="form" class="form-signin">
+	<div n:foreach="$form->errors as $error" class="alert alert-danger" role="alert">
+		{$error}
+	</div>
+
+	<label n:name="login">Přihlašovací (orion) jméno</label>
+	<div class="mb-3">
+		<input n:name="login" class="form-control" placeholder="jannovak" autofocus>
+	</div>
+
+	<label n:name="firstname">Křestní jméno</label>
+	<div class="mb-3">
+		<input n:name="firstname" class="form-control" placeholder="Jan" autofocus>
+	</div>
+
+	<label n:name="lastname">Příjmení</label>
+	<div class="mb-3">
+		<input n:name="lastname" class="form-control" placeholder="Novák" autofocus>
+	</div>
+
+	<label n:name="workspace">Oddělení</label>
+	<div class="mb-3">
+		{input workspace class => "form-control"}
+	</div>
+
+	<div class="text-center">
+		<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Přihlásit</button>
+	</div>
+</form>

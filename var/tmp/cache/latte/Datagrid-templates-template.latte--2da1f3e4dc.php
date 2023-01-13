@@ -577,7 +577,7 @@ final class Template2da1f3e4dc extends Latte\Runtime\Template
 		}
 		$iterator = $ʟ_it = $ʟ_it->getParent();
 		if ($actions || $control->isSortable() || $itemsDetail || $inlineEdit || $inlineAdd) /* line 197 */ {
-			echo '						<th class="col-action text-center">
+			echo '						<th class="col-action text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-left">
 							';
 			echo LR\Filters::escapeHtmlText(($this->filters->translate)('ublaboo_datagrid.action')) /* line 198 */;
 			echo '
@@ -776,7 +776,7 @@ final class Template2da1f3e4dc extends Latte\Runtime\Template
 			echo '							<tr>
 								<td colspan="';
 			echo LR\Filters::escapeHtmlAttr($control->getColumnsCount()) /* line 367 */;
-			echo '">
+			echo '" class="px-4">
 ';
 			if ($filter_active) /* line 368 */ {
 				echo '										';
@@ -1409,7 +1409,7 @@ final class Template2da1f3e4dc extends Latte\Runtime\Template
 							}
 							$iterator = $ʟ_it = $ʟ_it->getParent();
 							if ($actions || $control->isSortable() || $itemsDetail || $inlineEdit || $inlineAdd) /* line 298 */ {
-								echo '										<td class="col-action">
+								echo '										<td class="col-action px-4">
 											';
 								$iterations = 0;
 								foreach ($actions as $key => $action) /* line 299 */ {

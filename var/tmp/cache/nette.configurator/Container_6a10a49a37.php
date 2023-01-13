@@ -12,7 +12,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 {
 	protected $tags = [
 		'console.command' => [
-			'07' => 'hello',
+			'011' => 'hello',
 			'nettrine.fixtures.loadDataFixturesCommand' => 'doctrine:fixtures:load',
 			'nettrine.migrations.currentCommand' => 'migrations:current',
 			'nettrine.migrations.diffCommand' => 'migrations:diff',
@@ -28,11 +28,13 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			'nettrine.migrations.upToDateCommand' => 'migrations:up-to-date',
 			'nettrine.migrations.versionCommand' => 'migrations:version',
 		],
-		'nettrine.subscriber' => ['09' => true],
+		'nettrine.subscriber' => ['013' => true],
 		'nette.inject' => [
 			'application.1' => true,
 			'application.10' => true,
 			'application.11' => true,
+			'application.12' => true,
+			'application.13' => true,
 			'application.2' => true,
 			'application.3' => true,
 			'application.4' => true,
@@ -190,7 +192,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			],
 		],
 		'Symfony\Component\Console\Command\Command' => [
-			0 => ['nettrine.fixtures.loadDataFixturesCommand', '07'],
+			0 => ['nettrine.fixtures.loadDataFixturesCommand', '011'],
 			2 => [
 				'nettrine.migrations.currentCommand',
 				'nettrine.migrations.diffCommand',
@@ -266,9 +268,13 @@ class Container_6a10a49a37 extends Nette\DI\Container
 		'Doctrine\ORM\Mapping\Driver\CompatibilityAnnotationDriver' => [2 => ['nettrine.orm.annotations.annotationDriver']],
 		'Doctrine\ORM\Mapping\Driver\AnnotationDriver' => [2 => ['nettrine.orm.annotations.annotationDriver']],
 		'App\UI\Form\FormFactory' => [['01']],
-		'App\UI\Components\Project\ProjectGridFactory' => [['02']],
-		'App\UI\Components\Sign\SignInFormFactory' => [['03']],
-		'App\UI\Components\User\UserGridFactory' => [['04']],
+		'App\UI\Components\UserSettings\PasswordChangeFormFactory' => [['02']],
+		'App\UI\Components\Project\ProjectGridFactory' => [['03']],
+		'App\UI\Components\Sign\SignInFormFactory' => [['04']],
+		'App\UI\Components\User\UserGridFactory' => [['05']],
+		'App\UI\Components\User\UserFormFactory' => [['06']],
+		'App\UI\Components\Workspace\WorkspaceFormFactory' => [['07']],
+		'App\UI\Components\Workspace\WorkspaceGridFactory' => [['08']],
 		'App\Model\Security\Passwords' => [['securitFy.passwords']],
 		'Nette\Security\Authenticator' => [['security.authenticator']],
 		'Nette\Security\IAuthenticator' => [['security.authenticator']],
@@ -276,15 +282,15 @@ class Container_6a10a49a37 extends Nette\DI\Container
 		'Nette\Security\Permission' => [['security.authorizator']],
 		'Nette\Security\Authorizator' => [['security.authorizator']],
 		'App\Model\Security\Authorizator\StaticAuthorizator' => [['security.authorizator']],
-		'App\Model\Router\RouterFactory' => [['05']],
+		'App\Model\Router\RouterFactory' => [['09']],
 		'Nette\Routing\Router' => [['router']],
-		'App\Domain\User\CreateUserFacade' => [['06']],
-		'App\Model\Console\HelloCommand' => [['07']],
-		'Nette\Application\Response' => [['08']],
-		'Stringable' => [['08']],
-		'Contributte\PdfResponse\PdfResponse' => [['08']],
-		'Doctrine\Common\EventSubscriber' => [['09']],
-		'Nettrine\Migrations\Subscriber\FixPostgreSQLDefaultSchemaSubscriber' => [['09']],
+		'App\Domain\User\CreateUserFacade' => [['010']],
+		'App\Model\Console\HelloCommand' => [['011']],
+		'Nette\Application\Response' => [['012']],
+		'Stringable' => [['012']],
+		'Contributte\PdfResponse\PdfResponse' => [['012']],
+		'Doctrine\Common\EventSubscriber' => [['013']],
+		'Nettrine\Migrations\Subscriber\FixPostgreSQLDefaultSchemaSubscriber' => [['013']],
 		'Nette\Application\UI\Presenter' => [
 			2 => [
 				'application.1',
@@ -296,6 +302,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\Application\UI\Control' => [
@@ -309,6 +317,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\Application\UI\Component' => [
@@ -322,6 +332,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\ComponentModel\Container' => [
@@ -335,6 +347,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\ComponentModel\Component' => [
@@ -348,6 +362,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\Application\IPresenter' => [
@@ -363,6 +379,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.9',
 				'application.10',
 				'application.11',
+				'application.12',
+				'application.13',
 			],
 		],
 		'Nette\Application\UI\Renderable' => [
@@ -376,6 +394,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'ArrayAccess' => [
@@ -389,6 +409,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\Application\UI\StatePersistent' => [
@@ -402,6 +424,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\Application\UI\SignalReceiver' => [
@@ -415,6 +439,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\ComponentModel\IContainer' => [
@@ -428,6 +454,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'Nette\ComponentModel\IComponent' => [
@@ -441,12 +469,23 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'App\Modules\Mailing\Home\HomePresenter' => [2 => ['application.1']],
 		'App\Modules\Base\BaseErrorPresenter' => [2 => ['application.2']],
 		'App\Modules\Base\SecuredPresenter' => [
-			2 => ['application.2', 'application.4', 'application.6', 'application.7', 'application.8', 'application.9'],
+			2 => [
+				'application.2',
+				'application.4',
+				'application.6',
+				'application.7',
+				'application.8',
+				'application.9',
+				'application.10',
+				'application.11',
+			],
 		],
 		'App\Modules\Base\BasePresenter' => [
 			2 => [
@@ -458,6 +497,8 @@ class Container_6a10a49a37 extends Nette\DI\Container
 				'application.7',
 				'application.8',
 				'application.9',
+				'application.10',
+				'application.11',
 			],
 		],
 		'App\Modules\Front\Error\ErrorPresenter' => [2 => ['application.2']],
@@ -468,14 +509,16 @@ class Container_6a10a49a37 extends Nette\DI\Container
 		'App\Modules\Front\Error4xx\Error4xxPresenter' => [2 => ['application.4']],
 		'App\Modules\Pdf\Home\HomePresenter' => [2 => ['application.5']],
 		'App\Modules\Admin\BaseAdminPresenter' => [
-			2 => ['application.6', 'application.7', 'application.8', 'application.9'],
+			2 => ['application.6', 'application.7', 'application.8', 'application.9', 'application.10', 'application.11'],
 		],
-		'App\Modules\Admin\Project\ProjectPresenter' => [2 => ['application.6']],
-		'App\Modules\Admin\Sign\SignPresenter' => [2 => ['application.7']],
-		'App\Modules\Admin\User\UserPresenter' => [2 => ['application.8']],
-		'App\Modules\Admin\Home\HomePresenter' => [2 => ['application.9']],
-		'NetteModule\ErrorPresenter' => [2 => ['application.10']],
-		'NetteModule\MicroPresenter' => [2 => ['application.11']],
+		'App\Modules\Admin\Workspace\WorkspacePresenter' => [2 => ['application.6']],
+		'App\Modules\Admin\Project\ProjectPresenter' => [2 => ['application.7']],
+		'App\Modules\Admin\Sign\SignPresenter' => [2 => ['application.8']],
+		'App\Modules\Admin\User\UserPresenter' => [2 => ['application.9']],
+		'App\Modules\Admin\Home\HomePresenter' => [2 => ['application.10']],
+		'App\Modules\Admin\UserSettings\UserSettingsPresenter' => [2 => ['application.11']],
+		'NetteModule\ErrorPresenter' => [2 => ['application.12']],
+		'NetteModule\MicroPresenter' => [2 => ['application.13']],
 		'Contributte\Translation\Latte\Filters' => [['contributte.translation.latte.filters']],
 	];
 
@@ -514,49 +557,96 @@ class Container_6a10a49a37 extends Nette\DI\Container
 	}
 
 
-	public function createService02(): App\UI\Components\Project\ProjectGridFactory
+	public function createService02(): App\UI\Components\UserSettings\PasswordChangeFormFactory
+	{
+		return new App\UI\Components\UserSettings\PasswordChangeFormFactory(
+			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('contributte.translation.translator'),
+			$this->getService('securitFy.passwords'),
+			$this->getService('security.user'),
+		);
+	}
+
+
+	public function createService03(): App\UI\Components\Project\ProjectGridFactory
 	{
 		return new App\UI\Components\Project\ProjectGridFactory(
 			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('security.user'),
 			$this->getService('contributte.translation.translator'),
 		);
 	}
 
 
-	public function createService03(): App\UI\Components\Sign\SignInFormFactory
+	public function createService04(): App\UI\Components\Sign\SignInFormFactory
 	{
-		return new App\UI\Components\Sign\SignInFormFactory($this->getService('security.user'));
+		return new App\UI\Components\Sign\SignInFormFactory(
+			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('security.user'),
+			$this->getService('contributte.translation.translator'),
+		);
 	}
 
 
-	public function createService04(): App\UI\Components\User\UserGridFactory
+	public function createService05(): App\UI\Components\User\UserGridFactory
 	{
 		return new App\UI\Components\User\UserGridFactory(
 			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('security.user'),
 			$this->getService('contributte.translation.translator'),
 		);
 	}
 
 
-	public function createService05(): App\Model\Router\RouterFactory
+	public function createService06(): App\UI\Components\User\UserFormFactory
+	{
+		return new App\UI\Components\User\UserFormFactory(
+			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('security.user'),
+			$this->getService('contributte.translation.translator'),
+		);
+	}
+
+
+	public function createService07(): App\UI\Components\Workspace\WorkspaceFormFactory
+	{
+		return new App\UI\Components\Workspace\WorkspaceFormFactory(
+			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('security.user'),
+			$this->getService('contributte.translation.translator'),
+		);
+	}
+
+
+	public function createService08(): App\UI\Components\Workspace\WorkspaceGridFactory
+	{
+		return new App\UI\Components\Workspace\WorkspaceGridFactory(
+			$this->getService('nettrine.orm.entityManagerDecorator'),
+			$this->getService('security.user'),
+			$this->getService('contributte.translation.translator'),
+		);
+	}
+
+
+	public function createService09(): App\Model\Router\RouterFactory
 	{
 		return new App\Model\Router\RouterFactory;
 	}
 
 
-	public function createService06(): App\Domain\User\CreateUserFacade
+	public function createService010(): App\Domain\User\CreateUserFacade
 	{
 		return new App\Domain\User\CreateUserFacade($this->getService('nettrine.orm.entityManagerDecorator'));
 	}
 
 
-	public function createService07(): App\Model\Console\HelloCommand
+	public function createService011(): App\Model\Console\HelloCommand
 	{
 		return new App\Model\Console\HelloCommand;
 	}
 
 
-	public function createService08(): Contributte\PdfResponse\PdfResponse
+	public function createService012(): Contributte\PdfResponse\PdfResponse
 	{
 		$service = new Contributte\PdfResponse\PdfResponse;
 		$service->mpdfConfig = ['tempDir' => '/__app__/app/../var/tmp/mpdf'];
@@ -564,7 +654,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 	}
 
 
-	public function createService09(): Nettrine\Migrations\Subscriber\FixPostgreSQLDefaultSchemaSubscriber
+	public function createService013(): Nettrine\Migrations\Subscriber\FixPostgreSQLDefaultSchemaSubscriber
 	{
 		return new Nettrine\Migrations\Subscriber\FixPostgreSQLDefaultSchemaSubscriber;
 	}
@@ -588,13 +678,57 @@ class Container_6a10a49a37 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__10(): NetteModule\ErrorPresenter
+	public function createServiceApplication__10(): App\Modules\Admin\Home\HomePresenter
+	{
+		$service = new App\Modules\Admin\Home\HomePresenter;
+		$service->injectPrimary(
+			$this,
+			$this->getService('application.presenterFactory'),
+			$this->getService('router'),
+			$this->getService('http.request'),
+			$this->getService('http.response'),
+			$this->getService('session.session'),
+			$this->getService('security.user'),
+			$this->getService('latte.templateFactory'),
+		);
+		$service->user = $this->getService('security.user');
+		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
+		$service->translator = $this->getService('contributte.translation.translator');
+		$service->dispatcher = $this->getService('contributte.events.dispatcher');
+		$service->invalidLinkMode = 5;
+		return $service;
+	}
+
+
+	public function createServiceApplication__11(): App\Modules\Admin\UserSettings\UserSettingsPresenter
+	{
+		$service = new App\Modules\Admin\UserSettings\UserSettingsPresenter;
+		$service->injectPrimary(
+			$this,
+			$this->getService('application.presenterFactory'),
+			$this->getService('router'),
+			$this->getService('http.request'),
+			$this->getService('http.response'),
+			$this->getService('session.session'),
+			$this->getService('security.user'),
+			$this->getService('latte.templateFactory'),
+		);
+		$service->user = $this->getService('security.user');
+		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
+		$service->translator = $this->getService('contributte.translation.translator');
+		$service->passwordChangeFormFactory = $this->getService('02');
+		$service->invalidLinkMode = 5;
+		return $service;
+	}
+
+
+	public function createServiceApplication__12(): NetteModule\ErrorPresenter
 	{
 		return new NetteModule\ErrorPresenter($this->getService('contributte.monolog.psrToTracyLazyAdapter'));
 	}
 
 
-	public function createServiceApplication__11(): NetteModule\MicroPresenter
+	public function createServiceApplication__13(): NetteModule\MicroPresenter
 	{
 		return new NetteModule\MicroPresenter($this, $this->getService('http.request'), $this->getService('router'));
 	}
@@ -613,6 +747,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
 		$service->invalidLinkMode = 5;
@@ -633,6 +768,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
 		$service->invalidLinkMode = 5;
@@ -653,6 +789,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
 		$service->invalidLinkMode = 5;
@@ -673,15 +810,39 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
-		$service->pdfResponse = $this->getService('08');
+		$service->pdfResponse = $this->getService('012');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
 
 
-	public function createServiceApplication__6(): App\Modules\Admin\Project\ProjectPresenter
+	public function createServiceApplication__6(): App\Modules\Admin\Workspace\WorkspacePresenter
+	{
+		$service = new App\Modules\Admin\Workspace\WorkspacePresenter;
+		$service->injectPrimary(
+			$this,
+			$this->getService('application.presenterFactory'),
+			$this->getService('router'),
+			$this->getService('http.request'),
+			$this->getService('http.response'),
+			$this->getService('session.session'),
+			$this->getService('security.user'),
+			$this->getService('latte.templateFactory'),
+		);
+		$service->workspaceGridFactory = $this->getService('08');
+		$service->workspaceFormFactory = $this->getService('07');
+		$service->user = $this->getService('security.user');
+		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
+		$service->translator = $this->getService('contributte.translation.translator');
+		$service->invalidLinkMode = 5;
+		return $service;
+	}
+
+
+	public function createServiceApplication__7(): App\Modules\Admin\Project\ProjectPresenter
 	{
 		$service = new App\Modules\Admin\Project\ProjectPresenter;
 		$service->injectPrimary(
@@ -694,15 +855,16 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
-		$service->projectGridFactory = $this->getService('02');
+		$service->projectGridFactory = $this->getService('03');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
 
 
-	public function createServiceApplication__7(): App\Modules\Admin\Sign\SignPresenter
+	public function createServiceApplication__8(): App\Modules\Admin\Sign\SignPresenter
 	{
 		$service = new App\Modules\Admin\Sign\SignPresenter;
 		$service->injectPrimary(
@@ -715,15 +877,16 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
-		$service->signInFormFactory = $this->getService('03');
+		$service->signInFormFactory = $this->getService('04');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
 
 
-	public function createServiceApplication__8(): App\Modules\Admin\User\UserPresenter
+	public function createServiceApplication__9(): App\Modules\Admin\User\UserPresenter
 	{
 		$service = new App\Modules\Admin\User\UserPresenter;
 		$service->injectPrimary(
@@ -736,30 +899,11 @@ class Container_6a10a49a37 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
-		$service->userGridFactory = $this->getService('04');
+		$service->userGridFactory = $this->getService('05');
+		$service->userFormFactory = $this->getService('06');
+		$service->user = $this->getService('security.user');
 		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
 		$service->translator = $this->getService('contributte.translation.translator');
-		$service->invalidLinkMode = 5;
-		return $service;
-	}
-
-
-	public function createServiceApplication__9(): App\Modules\Admin\Home\HomePresenter
-	{
-		$service = new App\Modules\Admin\Home\HomePresenter;
-		$service->injectPrimary(
-			$this,
-			$this->getService('application.presenterFactory'),
-			$this->getService('router'),
-			$this->getService('http.request'),
-			$this->getService('http.response'),
-			$this->getService('session.session'),
-			$this->getService('security.user'),
-			$this->getService('latte.templateFactory'),
-		);
-		$service->translatorSessionResolver = $this->getService('contributte.translation.localeResolverSession');
-		$service->translator = $this->getService('contributte.translation.translator');
-		$service->dispatcher = $this->getService('contributte.events.dispatcher');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
@@ -1201,7 +1345,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 	public function createServiceNettrine__dbal__eventManager(): Nettrine\DBAL\Events\ContainerAwareEventManager
 	{
 		$service = new Nettrine\DBAL\Events\ContainerAwareEventManager($this);
-		$service->addEventListener(['postGenerateSchema'], '09');
+		$service->addEventListener(['postGenerateSchema'], '013');
 		return $service;
 	}
 
@@ -1464,7 +1608,7 @@ class Container_6a10a49a37 extends Nette\DI\Container
 
 	public function createServiceRouter(): Nette\Routing\Router
 	{
-		return $this->getService('05')->create();
+		return $this->getService('09')->create();
 	}
 
 

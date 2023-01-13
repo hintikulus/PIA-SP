@@ -31,7 +31,8 @@ final class UserAuthenticator implements Authenticator
 	 */
 	public function authenticate(string $username, string $password): IIdentity
 	{
-		$user = $this->em->getUserRepository()->findOneBy(['email' => $username]);
+		//$user = $this->em->getUserRepository()->findOneBy(['email' => $username]);
+		$user = $this->em->getUserRepository()->findOneBy(['login' => $username]);
 
 		if (!$user) {
 			throw new AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);

@@ -33,7 +33,8 @@ class Project extends AbstractEntity
 		//$this->projectManagerUserId = $projectManagerUserId;
 	}
 
-	public function setProjectManagerUserId(int $projectManagerUserId) {
+	public function setProjectManagerUserId(int $projectManagerUserId)
+	{
 		//$this->projectManagerUserId = $projectManagerUserId;
 	}
 
@@ -47,7 +48,8 @@ class Project extends AbstractEntity
 		return $this->name;
 	}
 
-	public function getProjectManager(): User {
+	public function getProjectManager(): User
+	{
 		return $this->projectManager;
 	}
 

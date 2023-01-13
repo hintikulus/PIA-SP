@@ -10,18 +10,6 @@ use Nette\Localization\Translator;
 
 class ProjectGrid extends BaseComponent
 {
-	private EntityManager $em;
-
-	private Translator $translator;
-
-	public function __construct(
-		EntityManager $em,
-		Translator $translator,
-	)
-	{
-		$this->em = $em;
-		$this->translator = $translator;
-	}
 
 	public function createComponentGrid()
 	{
@@ -31,7 +19,6 @@ class ProjectGrid extends BaseComponent
 		$grid->addColumnText("name", "Název")
 			->setSortable()
 			->setRenderer(function(Project $project) {
-				bdump($project);
 				return $project->getName();
 			})
 		;
@@ -39,7 +26,8 @@ class ProjectGrid extends BaseComponent
 		$grid->addColumnText("project_manager", "Project Manager")
 			->setRenderer(function(Project $project) {
 				return $project->getProjectManager()->getFullname();
-			});
+			})
+		;
 
 		$grid->addFilterText("name", "Název");
 

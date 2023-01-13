@@ -1,0 +1,24 @@
+<form n:name="form" class="form-signin">
+	<div n:foreach="$form->errors as $error" class="alert alert-danger" role="alert">
+		{$error}
+	</div>
+
+	<label n:name="name">Název</label>
+	<div class="mb-3">
+		<input n:name="name" class="form-control" placeholder="Oddělení medicínské informatiky" autofocus>
+	</div>
+
+	<label n:name="shortcut">Zkratka</label>
+	<div class="mb-3">
+		<input n:name="shortcut" class="form-control" placeholder="OMI" autofocus>
+	</div>
+
+	<div class="row">
+		<div class="col-6 text-center">
+			<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Uložit</button>
+		</div>
+		<div class="col-6 text-center">
+			<a href="{$presenter->link('list')}" class="btn btn-secondary w-100 mt-4 mb-0">Zrušit</a>
+		</div>
+	</div>
+</form>

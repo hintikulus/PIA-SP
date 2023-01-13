@@ -39,7 +39,7 @@ final class Template8ce36c7ae7 extends Latte\Runtime\Template
 	<div class="col-12">
 		<div class="card mb-4">
 			<div class="card-header pb-0">
-				<h6>Uživatelé</h6>
+				<h6>Projekty</h6>
 			</div>
 			<div class="card-body px-0 pt-0 pb-2">
 				<div class="table-responsive p-0">

@@ -11,15 +11,6 @@ use Nette\Security\User;
 
 class SignInForm extends BaseComponent
 {
-	///* @var User $user @inject */
-	private User $user;
-
-	public function __construct(User $user)
-	{
-		$this->user = $user;
-		bdump($this->user ?? null);
-	}
-
 	public function render($params = null)
 	{
 		parent::render($params);
@@ -28,7 +19,7 @@ class SignInForm extends BaseComponent
 	public function createComponentForm(): Form
 	{
 		$form = new BaseForm();
-		$form->addEmail('email')
+		$form->addText('email')
 			->setRequired(true)
 		;
 		$form->addPassword('password')

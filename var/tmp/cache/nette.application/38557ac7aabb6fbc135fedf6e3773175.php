@@ -32,6 +32,11 @@ return array (
       0 => '/__app__/app/modules/Pdf/Home/HomePresenter.php',
       1 => 1672920098,
     ),
+    'App\\Modules\\Admin\\Workspace\\WorkspacePresenter' => 
+    array (
+      0 => '/__app__/app/modules/Admin/Workspace/WorkspacePresenter.php',
+      1 => 1673627074,
+    ),
     'App\\Modules\\Admin\\BaseAdminPresenter' => 
     array (
       0 => '/__app__/app/modules/Admin/BaseAdminPresenter.php',
@@ -50,17 +55,22 @@ return array (
     'App\\Modules\\Admin\\User\\UserPresenter' => 
     array (
       0 => '/__app__/app/modules/Admin/User/UserPresenter.php',
-      1 => 1673476478,
+      1 => 1673595436,
     ),
     'App\\Modules\\Admin\\Home\\HomePresenter' => 
     array (
       0 => '/__app__/app/modules/Admin/Home/HomePresenter.php',
       1 => 1673465300,
     ),
+    'App\\Modules\\Admin\\UserSettings\\UserSettingsPresenter' => 
+    array (
+      0 => '/__app__/app/modules/Admin/UserSettings/UserSettingsPresenter.php',
+      1 => 1673521365,
+    ),
     'App\\Modules\\Base\\BasePresenter' => 
     array (
       0 => '/__app__/app/modules/Base/BasePresenter.php',
-      1 => 1673358600,
+      1 => 1673588450,
     ),
     'App\\Modules\\Base\\SecuredPresenter' => 
     array (

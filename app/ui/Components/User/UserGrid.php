@@ -11,19 +11,6 @@ use Ublaboo\DataGrid\DataGrid;
 
 class UserGrid extends BaseComponent
 {
-	private EntityManager $em;
-
-	private Translator $translator;
-
-	public function __construct(
-		EntityManager $em,
-		Translator $translator,
-	)
-	{
-		$this->em = $em;
-		$this->translator = $translator;
-	}
-
 	public function createComponentGrid()
 	{
 		$grid = new BaseGrid();
@@ -55,9 +42,9 @@ class UserGrid extends BaseComponent
 		$grid->addFilterText("email", "Email");
 
 		$grid->addColumnText("role", "Role")->setRenderer(function(User $row) {
-			bdump($row);
 			return $this->translator->translate("admin.role." . $row->getRole());
 		});
+
 		return $grid;
 	}
 
