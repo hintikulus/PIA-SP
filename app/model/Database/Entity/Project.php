@@ -27,18 +27,18 @@ class Project extends AbstractEntity
 	 */
 	private User|null $projectManager;
 
-	public function __construct(string $name, int $projectManagerUserId)
+	public function __construct(string $name, User $projectManager)
 	{
 		$this->name = $name;
-		//$this->projectManagerUserId = $projectManagerUserId;
+		$this->projectManager = $projectManager;
 	}
 
-	public function setProjectManagerUserId(int $projectManagerUserId)
+	public function setProjectManager(User $projectManager): void
 	{
-		//$this->projectManagerUserId = $projectManagerUserId;
+		$this->projectManager = $projectManager;
 	}
 
-	public function setName(string $name)
+	public function setName(string $name): void
 	{
 		$this->name = $name;
 	}
