@@ -32,6 +32,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
+    - name: "PHPStan"
+      run: "make phpstan"
+
     - name: Build the Docker image
       run: docker build . --file .docker/php/Dockerfile --tag my-image-name:$(date +%s)
 
@@ -40,10 +43,6 @@ jobs:
 
     # - name: Run test suite
     #   run: composer run-script test
-
-
-    - name: "PHPStan"
-      run: "make phpstan"
 
   tests:
     name: "Tests"
