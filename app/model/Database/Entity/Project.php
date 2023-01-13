@@ -48,7 +48,7 @@ class Project extends AbstractEntity
 		return $this->name;
 	}
 
-	public function getProjectManager(): User
+	public function getProjectManager(): ?User
 	{
 		return $this->projectManager;
 	}

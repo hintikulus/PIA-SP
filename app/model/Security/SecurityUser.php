@@ -13,7 +13,7 @@ final class SecurityUser extends NetteUser
 
 	public function isAdmin(): bool
 	{
-		return $this->isInRole(User::ROLE_ADMIN);
+		return $this->isInRole(User::ROLE_SECRETARIAT);
 	}
 
 }

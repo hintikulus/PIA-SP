@@ -16,13 +16,13 @@ class WorkspacePresenter extends BaseAdminPresenter
 	/** @var WorkspaceFormFactory @inject */
 	public WorkspaceFormFactory $workspaceFormFactory;
 
-	public function actionAdd() {
+	public function actionAdd(): void {
 		if(!empty($this->getParameter('id'))) {
 			$this->redirect(':list');
 		}
 	}
 
-	public function actionEdit() {
+	public function actionEdit(): void {
 		if(empty($this->getParameter('id'))) {
 			$this->redirect(':list');
 		}

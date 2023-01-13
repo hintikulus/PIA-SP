@@ -29,6 +29,7 @@ class User extends AbstractEntity
 	public const STATES = [self::STATE_FRESH, self::STATE_BLOCKED, self::STATE_ACTIVATED];
 
 	use TId;
+
 	//use TCreatedAt;
 	//use TUpdatedAt;
 
@@ -72,12 +73,12 @@ class User extends AbstractEntity
 	 * @var DateTime|NULL
 	 * @ORM\Column(type="datetime", nullable=TRUE)
 	 */
-	private $lastLoggedAt;
+	private ?DateTime $lastLoggedAt;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="Project", mappedBy="project", cascade={"persist"})
 	 */
-	private $managedProjects;
+	private ArrayCollection $managedProjects;
 
 	public function __construct(string $firstname, string $lastname, string $email, string $login, string $passwordHash)
 	{
@@ -159,14 +160,16 @@ class User extends AbstractEntity
 		$this->lastname = $lastname;
 	}
 
-	public function setState(int $state): void
-	{
-		if (!in_array($state, self::STATES)) {
-			throw new InvalidArgumentException(sprintf('Unsupported state %s', $state));
-		}
+	/*
+		public function setState(int $state): void
+		{
+			if (!in_array($state, self::STATES)) {
+				throw new InvalidArgumentException(sprintf('Unsupported state %s', $state));
+			}
 
-		$this->state = $state;
-	}
+			$this->state = $state;
+		}
+	*/
 
 	public function getGravatar(): string
 	{
@@ -176,11 +179,11 @@ class User extends AbstractEntity
 	public function toIdentity(): Identity
 	{
 		return new Identity($this->getId(), [$this->role], [
-			'email' => $this->email,
+			'email'     => $this->email,
 			'firstname' => $this->firstname,
-			'lastname' => $this->lastname,
+			'lastname'  => $this->lastname,
 			//'state' => $this->state,
-			'gravatar' => $this->getGravatar(),
+			'gravatar'  => $this->getGravatar(),
 		]);
 	}
 

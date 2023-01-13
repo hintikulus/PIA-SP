@@ -4,7 +4,9 @@ namespace App\Modules\Admin\User;
 
 use App\Model\App;
 use App\Modules\Admin\BaseAdminPresenter;
+use App\UI\Components\User\UserForm;
 use App\UI\Components\User\UserFormFactory;
+use App\UI\Components\User\UserGrid;
 use App\UI\Components\User\UserGridFactory;
 use Nette\Application\UI\ComponentReflection;
 
@@ -16,12 +18,13 @@ class UserPresenter extends BaseAdminPresenter
 	/** @var UserFormFactory @inject */
 	public UserFormFactory $userFormFactory;
 
-	public function createComponentUserListGrid()
+	public function createComponentUserListGrid(): UserGrid
 	{
 		return $this->userGridFactory->create();
 	}
 
-	public function createComponentUserForm() {
+	public function createComponentUserForm(): UserForm
+	{
 		return $this->userFormFactory->create();
 	}
 
