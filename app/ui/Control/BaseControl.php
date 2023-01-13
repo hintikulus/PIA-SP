@@ -16,7 +16,7 @@ abstract class BaseControl extends Control
 	private ?string $componentNameWithPath = null;
 	protected ?string $latteFile = null;
 
-	public function render($params = null)
+	public function render(mixed $params = null): void
 	{
 		if (empty($this->latteFile))
 		{

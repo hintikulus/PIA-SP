@@ -26,7 +26,7 @@ class WorkspaceForm extends BaseComponent
 		$this->id = $workspaceId;
 	}
 
-	public function render($params = null)
+	public function render(mixed $params = null) :void
 	{
 		if ($this->id !== null)
 		{
@@ -65,12 +65,16 @@ class WorkspaceForm extends BaseComponent
 		return $form;
 	}
 
-	public function onSuccess(Form $form, ArrayHash $values)
+	public function onSuccess(Form $form, ArrayHash $values): void
 	{
 		if(empty($values['id'])) {
 			$workspace = new Workspace($values['name'], $values['shortcut']);
 		} else {
 			$workspace = $this->em->getWorkspaceRepository()->find($values['id']);
+			if($workspace === null) {
+				return;
+			}
+
 			$workspace->setName($values['name']);
 			$workspace->setShortcut($values['shortcut']);
 		}

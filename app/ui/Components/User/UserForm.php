@@ -7,7 +7,7 @@ use App\UI\Form\BaseForm;
 
 class UserForm extends BaseComponent
 {
-	public function createComponentForm()
+	public function createComponentForm(): BaseForm
 	{
 		$form = new BaseForm();
 

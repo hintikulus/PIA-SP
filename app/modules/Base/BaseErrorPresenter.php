@@ -4,8 +4,8 @@ namespace App\Modules\Base;
 
 use Nette\Application\BadRequestException;
 use Nette\Application\Helpers;
-use Nette\Application\IResponse as AppResponse;
 use Nette\Application\Request;
+use Nette\Application\Response;
 use Nette\Application\Responses\CallbackResponse;
 use Nette\Application\Responses\ForwardResponse;
 use Nette\Http\IRequest;
@@ -21,7 +21,7 @@ abstract class BaseErrorPresenter extends SecuredPresenter
 	/**
 	 * @return ForwardResponse|CallbackResponse
 	 */
-	public function run(Request $request): AppResponse
+	public function run(Request $request): Response
 	{
 		$e = $request->getParameter('exception');
 

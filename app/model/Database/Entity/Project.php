@@ -25,7 +25,7 @@ class Project extends AbstractEntity
 	 * @ORM\ManyToOne(targetEntity="User")
 	 * @ORM\JoinColumn(name="project_manager_user_id", referencedColumnName="id")
 	 */
-	private User|null $projectManager;
+	private User $projectManager;
 
 	public function __construct(string $name, User $projectManager)
 	{
@@ -48,7 +48,7 @@ class Project extends AbstractEntity
 		return $this->name;
 	}
 
-	public function getProjectManager(): ?User
+	public function getProjectManager(): User
 	{
 		return $this->projectManager;
 	}

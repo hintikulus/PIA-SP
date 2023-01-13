@@ -76,7 +76,7 @@ class User extends AbstractEntity
 	private ?DateTime $lastLoggedAt;
 
 	/**
-	 * @var ArrayCollection<Project>
+	 * @var ArrayCollection<int, Project>
 	 * @ORM\OneToMany(targetEntity="Project", mappedBy="project", cascade={"persist"})
 	 */
 	private ArrayCollection $managedProjects;

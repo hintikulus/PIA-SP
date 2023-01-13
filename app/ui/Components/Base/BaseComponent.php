@@ -27,7 +27,7 @@ class BaseComponent extends Control
 		$this->translator = $translator;
 	}
 
-	public function render($params = null)
+	public function render(mixed $params = null): void
 	{
 		if (empty($this->latteFile))
 		{

@@ -11,11 +11,6 @@ use Nette\Security\User;
 
 class SignInForm extends BaseComponent
 {
-	public function render($params = null)
-	{
-		parent::render($params);
-	}
-
 	public function createComponentForm(): Form
 	{
 		$form = new BaseForm();

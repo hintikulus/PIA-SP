@@ -40,7 +40,7 @@ class PasswordChangeForm extends BaseComponent
 		return $form;
 	}
 
-	public function onValidate(Form $form, ArrayHash $values)
+	public function onValidate(Form $form, ArrayHash $values): void
 	{
 		if ($values['new_password'] != $values['new_password_again'])
 		{
@@ -49,21 +49,28 @@ class PasswordChangeForm extends BaseComponent
 
 		$userEntity = $this->em->getUserRepository()->find($this->user->getId());
 
+		if($userEntity === null) {
+			return;
+		}
+
 		if (!$this->passwords->verify($values['old_password'], $userEntity->getPasswordHash()))
 		{
 			$form->addError("Aktuální heslo nesouhlasí.");
 		}
 	}
 
-	public function onSuccess(Form $form)
+	public function onSuccess(Form $form): void
 	{
 		$values = $form->getValues();
 
 		$userEntity = $this->em->getUserRepository()->find((int)$this->user->getId());
 
-		$userEntity->changePasswordHash($this->passwords->hash($values['new_password']));
+		if($userEntity !== null)
+		{
+			$userEntity->changePasswordHash($this->passwords->hash($values['new_password']));
+			$this->em->persist($userEntity);
+			$this->em->flush();
+		}
 
-		$this->em->persist($userEntity);
-		$this->em->flush();
 	}
 }

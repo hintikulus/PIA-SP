@@ -11,7 +11,7 @@ use Ublaboo\DataGrid\DataGrid;
 
 class UserGrid extends BaseComponent
 {
-	public function createComponentGrid()
+	public function createComponentGrid(): BaseGrid
 	{
 		$grid = new BaseGrid();
 		$grid->setDataSource($this->em->getUserRepository()->createQueryBuilder("ur"));

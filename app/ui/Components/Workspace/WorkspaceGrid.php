@@ -34,9 +34,14 @@ class WorkspaceGrid extends BaseComponent
 		return $grid;
 	}
 
-	public function handleDelete(int $id)
+	public function handleDelete(int $id): void
 	{
 		$workspace = $this->em->getWorkspaceRepository()->find($id);
+
+		if($workspace === null) {
+			return;
+		}
+
 		$this->em->remove($workspace);
 		$this->em->flush();
 

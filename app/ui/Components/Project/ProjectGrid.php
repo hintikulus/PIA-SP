@@ -11,7 +11,7 @@ use Nette\Localization\Translator;
 class ProjectGrid extends BaseComponent
 {
 
-	public function createComponentGrid()
+	public function createComponentGrid(): BaseGrid
 	{
 		$grid = new BaseGrid();
 		$grid->setDataSource($this->em->getProjectRepository()->createQueryBuilder("pr"));
