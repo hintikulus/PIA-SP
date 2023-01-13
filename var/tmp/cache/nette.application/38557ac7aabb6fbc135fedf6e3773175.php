@@ -35,7 +35,7 @@ return array (
     'App\\Modules\\Admin\\Workspace\\WorkspacePresenter' => 
     array (
       0 => '/__app__/app/modules/Admin/Workspace/WorkspacePresenter.php',
-      1 => 1673627074,
+      1 => 1673646670,
     ),
     'App\\Modules\\Admin\\BaseAdminPresenter' => 
     array (
@@ -55,7 +55,7 @@ return array (
     'App\\Modules\\Admin\\User\\UserPresenter' => 
     array (
       0 => '/__app__/app/modules/Admin/User/UserPresenter.php',
-      1 => 1673595436,
+      1 => 1673646670,
     ),
     'App\\Modules\\Admin\\Home\\HomePresenter' => 
     array (
@@ -65,12 +65,12 @@ return array (
     'App\\Modules\\Admin\\UserSettings\\UserSettingsPresenter' => 
     array (
       0 => '/__app__/app/modules/Admin/UserSettings/UserSettingsPresenter.php',
-      1 => 1673521365,
+      1 => 1673646670,
     ),
     'App\\Modules\\Base\\BasePresenter' => 
     array (
       0 => '/__app__/app/modules/Base/BasePresenter.php',
-      1 => 1673588450,
+      1 => 1673646670,
     ),
     'App\\Modules\\Base\\SecuredPresenter' => 
     array (

@@ -1,6 +1,6 @@
 {
-  "name": "contributte/webapp-skeleton",
-  "description": "Webapp skeleton is full featured web app kit based on Nette Framework + Contributte and many useful packages by @f3l1x.",
+  "name": "hintik/pia-sp",
+  "description": "Semestralni prace z predmenu Programovani internetovych aplikaci",
   "keywords": [
     "php",
     "nette",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "type": "project",
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.1",
 
     "contributte/bootstrap": "^0.5.0",
     "contributte/application": "^0.5.0",

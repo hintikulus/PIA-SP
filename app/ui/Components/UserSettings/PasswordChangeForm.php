@@ -13,22 +13,17 @@ use Nette\Utils\ArrayHash;
 
 class PasswordChangeForm extends BaseComponent
 {
-	private EntityManager $em;
-
-	private Translator $translator;
-
 	private Passwords $passwords;
 
-	private User $user;
-
 	public function __construct(
-		EntityManager $em, Translator $translator, Passwords $passwords, User $user,
+		EntityManager $em,
+		User $user,
+		Translator $translator,
+		Passwords $passwords,
 	)
 	{
-		$this->em = $em;
-		$this->translator = $translator;
+		parent::__construct($em, $user, $translator);
 		$this->passwords = $passwords;
-		$this->user = $user;
 	}
 
 	public function createComponentForm(): BaseForm

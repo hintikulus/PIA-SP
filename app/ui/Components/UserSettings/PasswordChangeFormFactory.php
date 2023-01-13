@@ -5,6 +5,7 @@ namespace App\UI\Components\UserSettings;
 use App\Model\Database\EntityManager;
 use App\Model\Database\Repository\UserRepository;
 use App\Model\Security\Passwords;
+use App\UI\Components\Base\BaseFactoryTrait;
 use App\UI\Components\User\UserGrid;
 use App\UI\Form\BaseForm;
 use Contributte\Translation\Translator;
@@ -13,6 +14,7 @@ use Nette\Security\User;
 class PasswordChangeFormFactory
 {
 
+	use BaseFactoryTrait;
 	private EntityManager $em;
 	private Translator $translator;
 	private Passwords $passwords;
@@ -33,6 +35,6 @@ class PasswordChangeFormFactory
 
 	public function create(): PasswordChangeForm
 	{
-		return new PasswordChangeForm($this->em, $this->translator, $this->passwords, $this->user);
+		return new PasswordChangeForm($this->em, $this->user, $this->translator, $this->passwords);
 	}
 }
