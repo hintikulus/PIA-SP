@@ -7,9 +7,10 @@ use App\Model\Database\Entity\Attributes\TId;
 use App\Model\Database\Entity\Attributes\TUpdatedAt;
 use App\Model\Exception\Logic\InvalidArgumentException;
 use App\Model\Security\Identity;
-use App\Model\Utils\DateTime;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Database\Repository\UserRepository")
@@ -76,10 +77,10 @@ class User extends AbstractEntity
 	private ?DateTime $lastLoggedAt;
 
 	/**
-	 * @var ArrayCollection<int, Project>
+	 * @var PersistentCollection<int, Project>
 	 * @ORM\OneToMany(targetEntity="Project", mappedBy="project", cascade={"persist"})
 	 */
-	private ArrayCollection $managedProjects;
+	private PersistentCollection $managedProjects;
 
 	public function __construct(string $firstname, string $lastname, string $email, string $login, string $passwordHash)
 	{
@@ -91,7 +92,6 @@ class User extends AbstractEntity
 
 		$this->role = self::ROLE_USER;
 
-		$this->managedProjects = new \Doctrine\Common\Collections\ArrayCollection();
 		//$this->state = self::STATE_FRESH;
 	}
 
@@ -188,4 +188,8 @@ class User extends AbstractEntity
 		]);
 	}
 
+	public function addManagedProject(Project $project): void
+	{
+		$this->managedProjects->add($project);
+	}
 }

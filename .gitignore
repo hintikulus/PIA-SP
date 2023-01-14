@@ -10,6 +10,9 @@
 # Assets
 /www/dist
 
+# Chache
+/var/tmp
+
 # Tests
 /tests/*.log
 /tests/tmp
