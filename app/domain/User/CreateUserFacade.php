@@ -8,7 +8,6 @@ use App\Model\Security\Passwords;
 
 class CreateUserFacade
 {
-
 	/** @var EntityManager */
 	private $em;
 

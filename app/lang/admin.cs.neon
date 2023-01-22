@@ -4,24 +4,82 @@ base:
 	add: 'Přidat'
 	edit: 'Upravit'
 	deleteConfirm: 'Opravdu chcete odstranit záznam?'
+	cancelButton: 'Zrušit'
+	saveButton: 'Uložit'
+	show: 'Zobrazit'
 
 role:
 	secretariat: 'Sekretariát'
 	department_manager: 'Vedoucí oddělení'
+	superior: 'Nadřízený'
 	user: 'Zaměstnanec'
+
+allocation:
+	status:
+		active: 'Aktivní'
+		draft: 'Rozpracované'
+		canceled: 'Zrušené'
 
 user:
 	menu: 'Lidé'
 
+userAllocation:
+	title: 'Moje alokace'
+	title_multiple: 'Moje alokace'
+
+	attributes:
+		project: 'Projekt'
+		timespan_from: 'Od'
+		timespan_to: 'Do'
+		allocation: 'Alokace (h/týd.)'
+		allocation_fte: 'Alokace (FTE)'
+		description: 'Popis'
+		state: 'Status'
+
+	form:
+		title_add: 'Přidat alokaci'
+		title_edit: 'Upravit alokaci'
+
+project:
+	menu: 'Projekty'
+	title: 'Projekt'
+	title_multiple: 'Projekty'
+
+	addButton: 'Přidat projekt'
+	addAllocationButton: 'Přidat alokaci'
+
+	details: 'Podrobnosti'
+	no_description: 'Projekt nemá stanovený žádný popis.'
+	allocations_card: 'Seznam alokací'
+
+	attributes:
+		name: 'Název'
+		project_manager: 'Vedoucí projektu'
+		description: 'Popis'
+
+	form:
+		title_add: 'Přidat projekt'
+		title_edit: 'Upravit projekt'
+		placeholders:
+			name: 'Název projektu'
+			project_manager: 'Vyberte vedoucího'
+
 workspace:
-	menu: 'Pracovní skupiny'
-	title: 'Pracovní skupina'
-	title_multiple: 'Pracovní skupiny'
+	menu: 'Oddělení'
+	title: 'Oddělení'
+	title_multiple: 'Oddělení'
 
 	attributes:
 		name: 'Název'
 		shortcut: 'Zkratka'
 
 	form:
-		title_add: 'Přidat pracovní skupinu'
-		title_edit: 'Upravit pracovní skupinu'
+		title_add: 'Přidat oddělení'
+		title_edit: 'Upravit oddělení'
+		save_success: 'Oddělení bylo úspěšně uloženo.'
+		save_error_null: 'Oddělení nebylo nalezeno. Uložení neproběhlo.'
+		delete_success: 'Oddělení bylo úspěšně odstraněno.'
+		delete_error_null: 'Oddělení nebylo nalezeno. Odstranění neproběhlo.'
+		placeholders:
+			name: 'Oddělení mechaniky'
+			shortcut: 'Zkratka oddělení'

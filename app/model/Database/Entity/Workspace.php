@@ -2,6 +2,7 @@
 
 namespace App\Model\Database\Entity;
 
+use App\Model\Database\Entity\Attributes\TDeleted;
 use App\Model\Database\Entity\Attributes\TId;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Workspace extends AbstractEntity
 {
 	use TId;
+	use TDeleted;
 
 	/**
 	 * @var string

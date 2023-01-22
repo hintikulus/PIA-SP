@@ -42,7 +42,8 @@
     "contributte/pdf": "^6.1",
     "contributte/translation": "^2.0",
     "ublaboo/datagrid": "^6.9",
-    "components/jquery": "^3.6"
+    "components/jquery": "^3.6",
+    "symfony/polyfill-iconv": "^1.27"
   },
   "require-dev": {
     "ninjify/qa": "^0.13",

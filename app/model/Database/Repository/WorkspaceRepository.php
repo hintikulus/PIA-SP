@@ -13,5 +13,10 @@ use App\Model\Database\Entity\Workspace;
  */
 class WorkspaceRepository extends AbstractRepository
 {
-
+	public function findByNotDeleted()
+	{
+		return $this->createQueryBuilder('wr')
+			->andWhere('wr.deleted = 0')
+		;
+	}
 }

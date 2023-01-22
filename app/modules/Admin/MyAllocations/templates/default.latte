@@ -1,0 +1,35 @@
+{block #content}
+<div class="row">
+	<div class="col-lg-8">
+		<div class="card mb-4">
+			<div class="card-header pb-0">
+				<div class="row">
+					<div class="col-lg-6">
+						<h6>Seznam úkolů</h6>
+					</div>
+				</div>
+			</div>
+			<div class="card-body px-0 pt-0 pb-2">
+				<div class="table-responsive p-0">
+					{control userAllocationGrid}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="card mb-4">
+			<div class="card-header pb-0">
+				<div class="row">
+					<div class="col-lg-6">
+						<h6>Mnou projektované projekty</h6>
+					</div>
+				</div>
+			</div>
+			<div class="card-body px-0 pt-0 pb-2">
+				<div class="table-responsive p-0">
+					{control projectManagerProjectsGrid}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

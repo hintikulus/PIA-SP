@@ -122,6 +122,7 @@
       <path value="$PROJECT_DIR$/vendor/contributte/translation" />
       <path value="$PROJECT_DIR$/vendor/ublaboo/datagrid" />
       <path value="$PROJECT_DIR$/vendor/components/jquery" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

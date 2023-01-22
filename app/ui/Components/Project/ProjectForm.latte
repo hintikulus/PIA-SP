@@ -1,0 +1,29 @@
+<form n:name="form" class="form-signin">
+	<div n:foreach="$form->errors as $error" class="alert alert-danger" role="alert">
+		{$error}
+	</div>
+
+	{label name /}
+	<div class="mb-3">
+		<input n:name="name" class="form-control" autofocus>
+	</div>
+
+	{label manager /}
+	<div class="mb-3">
+		{input manager class => "form-control"}
+	</div>
+
+	{label description /}
+	<div class="mb-3">
+		<textarea n:name="description" class="form-control" autofocus></textarea>
+	</div>
+
+	<div class="row">
+		<div class="col-6 text-center">
+			<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">{_admin.base.saveButton}</button>
+		</div>
+		<div class="col-6 text-center">
+			<a n:href="cancel!" class="btn btn-secondary w-100 mt-4 mb-0">{_admin.base.cancelButton}</a>
+		</div>
+	</div>
+</form>
