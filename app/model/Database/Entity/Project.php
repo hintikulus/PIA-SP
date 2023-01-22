@@ -2,7 +2,10 @@
 
 namespace App\Model\Database\Entity;
 
+use App\Model\Database\Entity\Attributes\TDeleted;
 use App\Model\Database\Entity\Attributes\TId;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Project extends AbstractEntity
 {
 	use TId;
+	use TDeleted;
 
 	/**
 	 * @var string
@@ -20,17 +24,27 @@ class Project extends AbstractEntity
 	 */
 	private $name;
 
-
 	/**
 	 * @ORM\ManyToOne(targetEntity="User")
 	 * @ORM\JoinColumn(name="project_manager_user_id", referencedColumnName="id")
 	 */
 	private User $projectManager;
 
-	public function __construct(string $name, User $projectManager)
+	/**
+	 * @var string
+	 * @ORM\Column
+	 */
+	private ?string $description;
+
+	public function __construct(
+		string $name,
+		User   $projectManager,
+		?string $description
+	)
 	{
 		$this->name = $name;
 		$this->projectManager = $projectManager;
+		$this->description = $description;
 	}
 
 	public function setProjectManager(User $projectManager): void
@@ -53,4 +67,12 @@ class Project extends AbstractEntity
 		return $this->projectManager;
 	}
 
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
+
+	public function setDescription(?string $description) {
+		$this->description = $description;
+	}
 }

@@ -2,20 +2,35 @@
 #
 services:
 	# Forms
+	- App\UI\Components\Workspace\WorkspaceFormFactory
+
 	- App\UI\Form\FormFactory
 	- App\UI\Components\UserSettings\PasswordChangeFormFactory
 	- App\UI\Components\Project\ProjectGridFactory
 	- App\UI\Components\Sign\SignInFormFactory
 	- App\UI\Components\User\UserGridFactory
 	- App\UI\Components\User\UserFormFactory
-	- App\UI\Components\Workspace\WorkspaceFormFactory
 	- App\UI\Components\Workspace\WorkspaceGridFactory
+	- App\UI\Components\Project\ProjectUserAllocationGridFactory
+	- App\UI\Components\Project\ProjectFormFactory
+	- App\UI\Components\Allocation\AllocationUserChooseGridFactory
+	- App\UI\Components\Allocation\AllocationFormFactory
+	- App\UI\Components\UserAllocation\UserAllocationGridFactory
+	- App\UI\Components\ProjectManagerProjects\ProjectManagerProjectsGridFactory
+	- App\UI\Components\Superior\SuperiorUserGridFactory
 
+	# Domain =================
+	- App\Domain\User\CreateUserFacade
+	- App\Domain\User\UserFacade
+	- App\Domain\ProjectAllocation\AllocationFacade
+	- App\Domain\Workspace\WorkspaceFacade
+	- App\Domain\Superior\SuperiorFacade
+	- App\Domain\Project\ProjectFacade
+#	- App\Domain\Order\OrderLogSubscriber
+#	- App\Domain\Http\RequestLoggerSubscriber
 
 	# Latte/Templates
 	latte.latteFactory:
-
-
 		setup:
 			- addFilter(datetime, App\Model\Latte\Filters::datetime)
 			- addFilter(neon, App\Model\Latte\Filters::neon)
@@ -43,14 +58,8 @@ services:
 		factory: @App\Model\Router\RouterFactory::create
 
 
-	# Domain =================
-	- App\Domain\User\CreateUserFacade
-#	- App\Domain\Order\OrderLogSubscriber
-#	- App\Domain\Http\RequestLoggerSubscriber
-
 	# Console ================
 	- {class: App\Model\Console\HelloCommand, tags: {console.command: hello}}
-
 
 
 latte:

@@ -1,0 +1,58 @@
+{varType App\Model\Database\Entity\Project $project}
+
+{block #content}
+<div class="row">
+	<div class="col-12 mb-4">
+		<span class="h4">{$project->getName()}</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-8">
+		<div class="card mb-4">
+			<div class="card-header pb-0">
+				<div class="row">
+					<div class="col-lg-6">
+						<h6>{_admin.project.allocations_card}</h6>
+					</div>
+					<div class="col-lg-6 my-auto text-end" n:if="$user->isAllowed('Admin:Project:allocationAdd')">
+						<a n:href="allocationAdd projectId => $project->getId()" class="btn btn-outline-primary btn-sm mb-0">{_admin.project.addAllocationButton}</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body px-0 pt-0 pb-2">
+				<div class="table-responsive p-0">
+					{control projectUserAllocationGrid}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="card mb-4">
+			<div class="card-header pb-0">
+				<div class="row">
+					<div class="col-lg-6">
+						<h6>{_admin.project.details}</h6>
+					</div>
+					<div class="col-lg-6 my-auto text-end">
+						<a n:href="edit $project->getId()" n:if="$user->isAllowed('Admin:Project:edit')" class="btn btn-outline-primary btn-sm mb-0">{_admin.base.edit}</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body pt-3">
+				<h6 class="text-uppercase text-body text-xs font-weight-bolder">{_admin.project.attributes.description}</h6>
+				<span>
+					{if !empty($project->getDescription())}
+						{$project->getDescription()}
+					{else}
+						<i>{_admin.project.no_description}.</i>
+					{/if}
+				</span>
+				<h6 class="text-uppercase text-body text-xs font-weight-bolder pt-4">{_admin.project.details}</h6>
+
+				<ul class="list-group">
+					<li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{_admin.project.attributes.project_manager}:</strong> &nbsp; {$project->getProjectManager()->getFullname()}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

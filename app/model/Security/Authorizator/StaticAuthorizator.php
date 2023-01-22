@@ -24,8 +24,9 @@ final class StaticAuthorizator extends Permission
 	protected function addRoles(): void
 	{
 		$this->addRole(User::ROLE_USER);
+		$this->addRole(User::ROLE_SUPERIOR, User::ROLE_USER);
 		$this->addRole(User::ROLE_DEPARTMENT_MANAGER, User::ROLE_USER);
-		$this->addRole(User::ROLE_SECRETARIAT, User::ROLE_USER);
+		$this->addRole(User::ROLE_SECRETARIAT, User::ROLE_DEPARTMENT_MANAGER);
 	}
 
 	/**
@@ -50,11 +51,21 @@ final class StaticAuthorizator extends Permission
 		$this->addResource('Admin:Project:list', 'Admin:Project');
 		$this->addResource('Admin:Project:add', 'Admin:Project');
 		$this->addResource('Admin:Project:edit', 'Admin:Project');
+		$this->addResource('Admin:Project:view', 'Admin:Project');
+		$this->addResource('Admin:Project:listAdd', 'Admin:Project');
+		$this->addResource('Admin:Project:listEdit', 'Admin:Project');
+		$this->addResource('Admin:Project:allocationAdd', 'Admin:Project');
+		$this->addResource('Admin:Project:allocationEdit', 'Admin:Project');
+		$this->addResource('Admin:Project:allocationDelete', 'Admin:Project');
 
 		$this->addResource('Admin:Workspace:list', 'Admin:Workspace');
 		$this->addResource('Admin:Workspace:add', 'Admin:Workspace');
 		$this->addResource('Admin:Workspace:edit', 'Admin:Workspace');
 
+		$this->addResource('Admin:Superior');
+		$this->addResource('Admin:Superior:user', "Admin:Superior");
+
+		$this->addResource("Admin:MyAllocations", "Admin:Home");
 		$this->addResource("Admin:UserSettings", "Admin:Home");
 	}
 
@@ -68,12 +79,20 @@ final class StaticAuthorizator extends Permission
 			'Admin:UserSettings',
 		]);
 
-		$this->allow(User::ROLE_DEPARTMENT_MANAGER, [
+		$this->allow(User::ROLE_SUPERIOR, [
+			'Admin:Superior'
 		]);
+
+		$this->allow(User::ROLE_DEPARTMENT_MANAGER, [
+			'Admin:Project:list'
+			]);
 
 		$this->allow(User::ROLE_SECRETARIAT, [
 			'Admin:User',
-			'Admin'
+			'Admin',
+			'Admin:Project:list',
+			'Admin:Project:view',
+			'Admin:Superior'
 		]);
 	}
 

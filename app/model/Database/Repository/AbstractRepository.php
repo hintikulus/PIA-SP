@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityRepository;
  */
 abstract class AbstractRepository extends EntityRepository
 {
+	/** @var array */
+	protected const NOT_DELETED = ['deleted' => 0];
 
 	/**
 	 * Fetches all records like $key => $value pairs

@@ -3,7 +3,15 @@
 	<div class="col-12">
 		<div class="card mb-4">
 			<div class="card-header pb-0">
-				<h6>Projekty</h6>
+				<div class="row">
+					<div class="col-lg-6 col-7">
+						<h6>{_admin.project.title_multiple}</h6>
+					</div>
+					<div class="col-lg-6 col-5 my-auto text-end">
+						<a n:if="$user->isAllowed('Admin:Project:add')" n:href=":listAdd"
+								class="btn btn-outline-primary btn-sm mb-0">{_admin.project.addButton}</a>
+					</div>
+				</div>
 			</div>
 			<div class="card-body px-0 pt-0 pb-2">
 				<div class="table-responsive p-0">
