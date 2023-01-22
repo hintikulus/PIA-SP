@@ -1,0 +1,110 @@
+<form n:name="form" class="">
+	<div n:foreach="$form->errors as $error" class="alert alert-danger" role="alert">
+		{$error}
+	</div>
+
+	{label project_name /}
+	<div class="mb-3">
+		<input n:name="project_name" class="form-control-plaintext" autofocus>
+	</div>
+
+	{label user_name /}
+	<div class="mb-3">
+		{input user_name class => "form-control-plaintext"}
+	</div>
+
+	{label allocation_fte /}
+	{label allocation_xfte /}
+	<div class="form-check form-check-info text-left">
+		<input n:name="allocation_switch" class="form-check-input">
+		<label n:name="allocation_switch" class="form-check-label">Uvést v násobku FTE</label>
+	</div>
+	<div class="mb-3">
+		<input n:name="allocation_fte" class="form-control" autofocus>
+		<input n:name="allocation_xfte" class="form-control" autofocus>
+	</div>
+
+	{label timespan_from /}
+	<div class="mb-3">
+		{input timespan_from class => "form-control-datetime form-control"}
+	</div>
+
+	<div class="form-check form-check-info text-left">
+		<input n:name="to_switch" class="form-check-input">
+		<label n:name="to_switch" class="form-check-label">Uvést konec</label>
+	</div>
+
+	{label timespan_to /}
+	<div class="mb-3">
+		{input timespan_to class => "form-control-datetime form-control"}
+	</div>
+
+	{label state /}
+	<div class="mb-3">
+		{input state class => "form-control"}
+	</div>
+
+	{label description /}
+	<div class="mb-3">
+		{input description class => "form-control"}
+	</div>
+
+	<div class="row">
+		<div class="col-6 text-center">
+			<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Uložit</button>
+		</div>
+		<div class="col-6 text-center">
+			<a n:href="cancel!" class="btn btn-secondary w-100 mt-4 mb-0">Zrušit</a>
+		</div>
+	</div>
+</form>
+
+<script>
+
+	Nette.toggle = (selector, visible, srcElement, event) =>
+	{
+		if(selector === "#switch-allocation-input")
+		{
+			var allocation_fte_input = $('input[id$="form-allocation_fte"]');
+			var allocation_xfte_input = $('input[id$="form-allocation_xfte"]');
+			var allocation_fte_label = $('label[for$="form-allocation_fte"]');
+			var allocation_xfte_label = $('label[for$="form-allocation_xfte"]');
+
+			allocation_fte_input.attr("disabled", visible);
+			allocation_xfte_input.attr("disabled", !visible);
+			if(visible)
+			{
+				allocation_fte_input.css("display", "none");
+				allocation_xfte_input.css("display", "block");
+				allocation_fte_label.css("display", "none");
+				allocation_xfte_label.css("display", "block");
+			}
+			else
+			{
+				allocation_fte_input.css("display", "block");
+				allocation_xfte_input.css("display", "none");
+				allocation_fte_label.css("display", "block");
+				allocation_xfte_label.css("display", "none");
+			}
+		}
+
+		if(selector === "#timespan-to-switch")
+		{
+			var timespan_to_input = $('input[id$="form-timespan_to"]');
+			var timespan_to_label = $('label[for$="form-timespan_to"]');
+
+			timespan_to_input.attr("disabled", !visible);
+
+			if(visible)
+			{
+				timespan_to_input.css("display", "block");
+				timespan_to_label.css("display", "block");
+			}
+			else
+			{
+				timespan_to_input.css("display", "none");
+				timespan_to_label.css("display", "none");
+			}
+		}
+	}
+</script>

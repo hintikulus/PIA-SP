@@ -1,0 +1,31 @@
+{varType App\Model\Database\Entity\Project $project}
+{varType ?App\Model\Database\Entity\User $selectedUser}
+
+{block #content}
+<div class="row">
+	{if empty($selectedUser)}
+	<div class="col-sm-12 col-md-12 col-lg-6 mx-auto">
+		<div class="card">
+			<div class="card-header pb-0">
+				<h6>Přidat alokaci - Vyberte pracovníka</h6>
+			</div>
+			<div class="card-body px-0 pt-0 pb-2">
+				<div class="table-responsive p-0">
+					{control allocationUserChooseGrid}
+				</div>
+			</div>
+		</div>
+	</div>
+	{else}
+		<div class="col-sm-12 col-md-6 col-lg-4 mx-auto">
+			<div class="card">
+				<div class="card-header pb-0">
+					<h6>Přidat alokaci</h6>
+				</div>
+				<div class="card-body pt-0">
+					{control allocationAddForm}
+				</div>
+			</div>
+		</div>
+	{/if}
+</div>

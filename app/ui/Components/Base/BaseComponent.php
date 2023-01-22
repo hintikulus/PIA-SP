@@ -4,6 +4,7 @@ namespace App\UI\Components\Base;
 
 use App\Model\Database\EntityManager;
 use Contributte\Translation\Translator;
+use Nette\Application\LinkGenerator;
 use Nette\Application\UI\Control;
 use Nette\Security\User;
 
@@ -16,12 +17,10 @@ class BaseComponent extends Control
 	protected EntityManager $em;
 	protected User $user;
 	protected Translator $translator;
+	protected LinkGenerator $linkGenerator;
 
-	public function __construct(
-		EntityManager $em,
-		User $user,
-		Translator $translator
-	) {
+	public function __construct(EntityManager $em, User $user, Translator $translator)
+	{
 		$this->em = $em;
 		$this->user = $user;
 		$this->translator = $translator;

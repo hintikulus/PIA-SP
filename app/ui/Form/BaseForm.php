@@ -13,7 +13,8 @@ class BaseForm extends Form
 		$input = self::addText($name, $label);
 		$input->addCondition(self::FILLED)
 			->addRule(self::MAX_LENGTH, null, 255)
-			->addRule(self::FLOAT);
+			->addRule(self::FLOAT)
+		;
 
 		return $input;
 	}
@@ -23,7 +24,19 @@ class BaseForm extends Form
 		$input = self::addText($name, $label);
 		$input->addCondition(self::FILLED)
 			->addRule(self::MAX_LENGTH, null, 255)
-			->addRule(self::NUMERIC);
+			->addRule(self::NUMERIC)
+		;
+
+		return $input;
+	}
+
+	public function addDatetime(string $name, ?string $label = null): TextInput
+	{
+		$input = self::addText($name, $label);
+		$input->setHtmlAttribute('type', 'datetime-local')
+			->addCondition(self::FILLED)
+			->addRule(self::MAX_LENGTH, null, 255)
+		;
 
 		return $input;
 	}

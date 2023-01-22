@@ -6,12 +6,7 @@ use App\Model\Database\EntityManager;
 use App\UI\Components\Base\BaseFactoryTrait;
 use Nette\Localization\Translator;
 
-class ProjectGridFactory
+interface ProjectGridFactory
 {
-	use BaseFactoryTrait;
-
-	public function create(): ProjectGrid
-	{
-		return new ProjectGrid($this->em, $this->user, $this->translator);
-	}
+	public function create(): ProjectGrid;
 }

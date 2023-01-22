@@ -17,15 +17,11 @@ class WorkspacePresenter extends BaseAdminPresenter
 	public WorkspaceFormFactory $workspaceFormFactory;
 
 	public function actionAdd(): void {
-		if(!empty($this->getParameter('id'))) {
-			$this->redirect(':list');
-		}
+
 	}
 
 	public function actionEdit(): void {
-		if(empty($this->getParameter('id'))) {
-			$this->redirect(':list');
-		}
+
 	}
 
 	public function createComponentWorkspaceListGrid(): WorkspaceGrid
@@ -35,6 +31,18 @@ class WorkspacePresenter extends BaseAdminPresenter
 
 	public function createComponentWorkspaceForm(): WorkspaceForm
 	{
-		return $this->workspaceFormFactory->create($this->getParameter('id'));
+		/** @var WorkspaceForm $control */
+		$control = $this->workspaceFormFactory->create($this->getParameter('id'));
+		$control->onSave[] = function()
+		{
+			$this->redirect(":list");
+		};
+
+		$control->onCancel[] = function()
+		{
+			$this->redirect(":list");
+		};
+
+		return $control;
 	}
 }

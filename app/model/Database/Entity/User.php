@@ -2,15 +2,15 @@
 
 namespace App\Model\Database\Entity;
 
-use App\Model\Database\Entity\Attributes\TCreatedAt;
+use App\Model\Database\Entity\Attributes\TDeleted;
 use App\Model\Database\Entity\Attributes\TId;
-use App\Model\Database\Entity\Attributes\TUpdatedAt;
-use App\Model\Exception\Logic\InvalidArgumentException;
 use App\Model\Security\Identity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\PersistentCollection;
+
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Database\Repository\UserRepository")
@@ -20,6 +20,7 @@ use Doctrine\ORM\PersistentCollection;
 class User extends AbstractEntity
 {
 	public const ROLE_USER = 'user';
+	public const ROLE_SUPERIOR = 'superior';
 	public const ROLE_DEPARTMENT_MANAGER = "department_manager";
 	public const ROLE_SECRETARIAT = "secretariat";
 
@@ -30,6 +31,7 @@ class User extends AbstractEntity
 	public const STATES = [self::STATE_FRESH, self::STATE_BLOCKED, self::STATE_ACTIVATED];
 
 	use TId;
+	use TDeleted;
 
 	//use TCreatedAt;
 	//use TUpdatedAt;
@@ -82,6 +84,24 @@ class User extends AbstractEntity
 	 */
 	private PersistentCollection $managedProjects;
 
+	/**
+	 * @var Collection<int, ProjectAllocation>
+	 * @ORM\OneToMany(targetEntity="ProjectAllocation", mappedBy="project_allocation")
+	 */
+	private Collection $projectAllocations;
+
+	/**
+	 * @var Collection<int, User>
+	 * @ORM\OneToMany(targetEntity="UserSuperiorUser", mappedBy="user")
+	 */
+	private Collection $subordinates;
+
+	/**
+	 * @var Collection<int, User>
+	 * @ORM\OneToMany(targetEntity="UserSuperiorUser", mappedBy="superiorUser")
+	 */
+	private Collection $superiors;
+
 	public function __construct(string $firstname, string $lastname, string $email, string $login, string $passwordHash)
 	{
 		$this->firstname = $firstname;
@@ -93,6 +113,7 @@ class User extends AbstractEntity
 		$this->role = self::ROLE_USER;
 
 		//$this->state = self::STATE_FRESH;
+		$this->projectAllocations = new ArrayCollection();
 	}
 
 	public function changeLoggedAt(): void
@@ -160,17 +181,6 @@ class User extends AbstractEntity
 		$this->firstname = $firstname;
 		$this->lastname = $lastname;
 	}
-
-	/*
-		public function setState(int $state): void
-		{
-			if (!in_array($state, self::STATES)) {
-				throw new InvalidArgumentException(sprintf('Unsupported state %s', $state));
-			}
-
-			$this->state = $state;
-		}
-	*/
 
 	public function getGravatar(): string
 	{
