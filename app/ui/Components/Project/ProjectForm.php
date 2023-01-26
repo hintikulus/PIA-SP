@@ -17,9 +17,10 @@ use Nette\Utils\ArrayHash;
 
 class ProjectForm extends BaseComponent
 {
-	public $onSave;
-
-	public $onCancel;
+	/** @var callable[] */
+	public array $onSave;
+	/** @var callable[] */
+	public array $onCancel;
 
 	private ?int $id = null;
 
@@ -137,6 +138,11 @@ class ProjectForm extends BaseComponent
 		}
 	}
 
+	/**
+	 * Zpracování hodnot z formuláře pro pozdější použití
+	 * @param ArrayHash $values
+	 * @return mixed[]
+	 */
 	private function transformValues(ArrayHash $values): array
 	{
 		$transformed = [];
@@ -166,7 +172,7 @@ class ProjectForm extends BaseComponent
 		return $transformed;
 	}
 
-	public function handleCancel()
+	public function handleCancel(): void
 	{
 		$this->onCancel($this);
 	}

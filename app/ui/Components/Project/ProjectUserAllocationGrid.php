@@ -36,7 +36,12 @@ class ProjectUserAllocationGrid extends BaseComponent
 		$this->projectId = $projectId;
 	}
 
-	public function createComponentGrid()
+	/**
+	 * Vytvoření komponenty gridu alokací projektu
+	 * @return BaseGrid
+	 * @throws \Ublaboo\DataGrid\Exception\DataGridException
+	 */
+	public function createComponentGrid(): BaseGrid
 	{
 		$grid = new BaseGrid();
 
@@ -112,53 +117,17 @@ class ProjectUserAllocationGrid extends BaseComponent
 			;
 		}
 
-		/**
-		 * Row for aggregated data (hour sum)
-		 */
-		$grid->setMultipleAggregationFunction(
-			new class implements IMultipleAggregationFunction {
-				/** @var float */
-				private float $projectAllocationSum = 0;
-
-				/** @var float */
-				private float $projectAllocationFTESum = 0;
-
-				public function getFilterDataType(): string
-				{
-					return IAggregationFunction::DATA_TYPE_FILTERED;
-				}
-
-				public function processDataSource($dataSource): void
-				{
-					/** @var QueryBuilder $qm */
-					$qm = clone $dataSource;
-					$result = $qm->select('SUM(ar.allocation) as allocation_sum')->getQuery()->getArrayResult();
-					$this->projectAllocationSum = round((float)$result[0]['allocation_sum'], 2);
-					$this->projectAllocationFTESum = round((float)$result[0]['allocation_sum'] / App::FTE, 2);
-				}
-
-
-				public function renderResult(string $key): string
-				{
-					if ($key === 'allocation')
-					{
-						return 'Σ: ' . $this->projectAllocationSum . " h";
-					}
-
-					if ($key === 'allocation_fte')
-					{
-						return 'Σ: ' . $this->projectAllocationFTESum . " FTE";
-					}
-
-					return '';
-				}
-			}
-		);
+		$grid->addAggregationRow();
 
 		return $grid;
 	}
 
-	public function handleDelete(int $id)
+	/**
+	 * Obsluha pro odstranění položky gridu
+	 * @param int $id
+	 * @return void
+	 */
+	public function handleDelete(int $id): void
 	{
 		$result = $this->allocationFacade->delete($id);
 

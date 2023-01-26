@@ -26,7 +26,7 @@ class SuperiorPresenter extends BaseAdminPresenter
 		$this->userFacade = $userFacade;
 	}
 
-	public function actionUser(int $id)
+	public function actionUser(int $id): void
 	{
 		$user = $this->userFacade->get($id);
 		if($user === null)

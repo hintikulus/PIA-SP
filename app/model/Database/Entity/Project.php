@@ -25,10 +25,16 @@ class Project extends AbstractEntity
 	private $name;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="managedProjects")
 	 * @ORM\JoinColumn(name="project_manager_user_id", referencedColumnName="id")
 	 */
 	private User $projectManager;
+
+	/**
+	 * @var Collection<int, ProjectAllocation>
+	 * @ORM\OneToMany(targetEntity="ProjectAllocation", mappedBy="project")
+	 */
+	private Collection $projectAllocations;
 
 	/**
 	 * @var string
@@ -37,8 +43,8 @@ class Project extends AbstractEntity
 	private ?string $description;
 
 	public function __construct(
-		string $name,
-		User   $projectManager,
+		string  $name,
+		User    $projectManager,
 		?string $description
 	)
 	{
@@ -72,7 +78,8 @@ class Project extends AbstractEntity
 		return $this->description;
 	}
 
-	public function setDescription(?string $description) {
+	public function setDescription(?string $description): void
+	{
 		$this->description = $description;
 	}
 }

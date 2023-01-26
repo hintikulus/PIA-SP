@@ -45,7 +45,7 @@ services:
 		setup:
 			- setNamespace("Webapp")
 
-	securitFy.passwords: App\Model\Security\Passwords
+	security.passwords: App\Model\Security\Passwords
 	security.user: App\Model\Security\SecurityUser
 	security.authenticator: App\Model\Security\Authenticator\UserAuthenticator
 	security.authorizator: App\Model\Security\Authorizator\StaticAuthorizator
@@ -59,8 +59,7 @@ services:
 
 
 	# Console ================
-	- {class: App\Model\Console\HelloCommand, tags: {console.command: hello}}
-
+	#- {class: App\Model\Console\HelloCommand, tags: {console.command: hello}}
 
 latte:
 	macros:

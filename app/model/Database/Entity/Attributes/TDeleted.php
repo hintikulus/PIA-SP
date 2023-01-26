@@ -16,7 +16,7 @@ trait TDeleted
 		return $this->deleted === 1;
 	}
 
-	public function setDeleted(bool $deleted = true) {
-		$this->deleted = $deleted;
+	public function setDeleted(bool $deleted = true): void {
+		$this->deleted = $deleted ? 1 : 0;
 	}
 }

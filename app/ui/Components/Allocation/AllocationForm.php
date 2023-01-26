@@ -20,8 +20,10 @@ use Nette\Utils\ArrayHash;
 
 class AllocationForm extends BaseComponent
 {
-	public $onSave;
-	public $onCancel;
+	/** @var callable[] */
+	public array $onSave;
+	/** @var callable[] */
+	public array $onCancel;
 
 	private AllocationFacade $allocationFacade;
 	private ProjectFacade $projectFacade;
@@ -30,6 +32,14 @@ class AllocationForm extends BaseComponent
 	private ?int $projectId;
 	private ?int $userId;
 
+	/**
+	 * @param AllocationFacade $allocationFacade
+	 * @param ProjectFacade $projectFacade
+	 * @param UserFacade $userFacade
+	 * @param User $user
+	 * @param Translator $translator
+	 * @param mixed[] $data
+	 */
 	public function __construct(
 		AllocationFacade $allocationFacade,
 		ProjectFacade    $projectFacade,
@@ -51,7 +61,10 @@ class AllocationForm extends BaseComponent
 		if ($this->allocationId !== null)
 		{
 			$allocation = $this->allocationFacade->get($this->allocationId);
-			$this->projectId = $allocation->getProject()->getId();
+
+			if($allocation !== null) {
+				$this->projectId = $allocation->getProject()->getId();
+			}
 		}
 	}
 
@@ -64,7 +77,6 @@ class AllocationForm extends BaseComponent
 	 */
 	public function render(mixed $params = null): void
 	{
-		bdump($this->allocationId);
 		// Nastavení defaultních hodnot formuláře
 		if ($this->allocationId !== null)
 		{
@@ -78,12 +90,20 @@ class AllocationForm extends BaseComponent
 					'user_name'       => $allocation->getUser()->getFullname(),
 					'allocation_xfte' => $allocation->getAllocationFTE(),
 					'allocation_fte'  => $allocation->getAllocation(),
-					'timespan_from'   => DateTime::from($allocation->getTimespanFrom()),
-					'timespan_to'     => DateTime::from($allocation->getTimespanTo()),
 					'to_switch'       => $allocation->getTimespanTo() != null,
 					'state'           => ProjectAllocation::STATES_IDS[$allocation->getState()],
 					'description'     => $allocation->getDescription(),
 				];
+
+				if($allocation->getTimespanFrom() !== null)
+				{
+					$defaults['timespan_from'] = DateTime::from($allocation->getTimespanFrom());
+				}
+
+				if($allocation->getTimespanTo() !== null)
+				{
+					$defaults['timespan_to'] = DateTime::from($allocation->getTimespanTo());
+				}
 
 				$this['form']->setDefaults($defaults);
 
@@ -195,7 +215,7 @@ class AllocationForm extends BaseComponent
 		return $form;
 	}
 
-	public function onValidate(Form $form, ArrayHash $values)
+	public function onValidate(Form $form, ArrayHash $values): void
 	{
 		$this->transformValues($values);
 
@@ -205,7 +225,7 @@ class AllocationForm extends BaseComponent
 		}
 	}
 
-	public function onSuccess(Form $form, ArrayHash $values)
+	public function onSuccess(Form $form, ArrayHash $values): void
 	{
 		$values = $this->transformValues($values);
 
@@ -230,12 +250,16 @@ class AllocationForm extends BaseComponent
 		$this->onSave($this, $values);
 	}
 
-	public function handleCancel()
+	public function handleCancel(): void
 	{
-		bdump($this->projectId);
 		$this->onCancel($this);
 	}
 
+	/**
+	 * Zpracování hodnot z formuláře pro pozdější použití
+	 * @param ArrayHash $values
+	 * @return mixed[]
+	 */
 	public function transformValues(ArrayHash $values): array
 	{
 		bdump($values);

@@ -3,6 +3,7 @@
 namespace App\Model\Database\Repository;
 
 use App\Model\Database\Entity\Workspace;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Workspace|NULL find($id, ?int $lockMode = NULL, ?int $lockVersion = NULL)
@@ -13,7 +14,7 @@ use App\Model\Database\Entity\Workspace;
  */
 class WorkspaceRepository extends AbstractRepository
 {
-	public function findByNotDeleted()
+	public function findByNotDeleted(): QueryBuilder
 	{
 		return $this->createQueryBuilder('wr')
 			->andWhere('wr.deleted = 0')

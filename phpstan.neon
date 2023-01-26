@@ -9,8 +9,10 @@ parameters:
 		- php
 
 	ignoreErrors:
-		# App/Model/Database/TRepository
+		-
+			message: '#Property [a-zA-Z0-9\\_]+Entity[a-zA-Z0-9\\_]+::\$[a-zA-Z0-9\\_]+ is never written, only read.#'
 		- '#Property App\\Model\\Database\\Entity\\.*::\$id \(int\) does not accept null.#'
+		# App/Model/Database/TRepository
 includes:
 	- vendor/phpstan/phpstan-nette/extension.neon
 	- vendor/phpstan/phpstan-nette/rules.neon

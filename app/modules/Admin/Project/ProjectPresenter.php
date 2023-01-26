@@ -78,7 +78,7 @@ class ProjectPresenter extends BaseAdminPresenter
 		}
 	}
 
-	public function actionAllocationEdit(int $id)
+	public function actionAllocationEdit(int $id): void
 	{
 		$allocation = $this->em->getProjectAllocationRepository()->find($id);
 

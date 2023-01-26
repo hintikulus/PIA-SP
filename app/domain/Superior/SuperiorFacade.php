@@ -16,6 +16,11 @@ class SuperiorFacade
 		$this->em = $em;
 	}
 
+	/**
+	 * Vytvoření dotazu pro získání všech podřízených zadaného uživatele
+	 * @param int $superiorId
+	 * @return QueryBuilder
+	 */
 	public function getQueryBuilderForSuperiorGrid(int $superiorId): QueryBuilder
 	{
 		$qb = $this->em->getUserSuperiorUserRepository()->findBySuperior($superiorId);

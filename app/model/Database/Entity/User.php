@@ -79,16 +79,22 @@ class User extends AbstractEntity
 	private ?DateTime $lastLoggedAt;
 
 	/**
-	 * @var PersistentCollection<int, Project>
-	 * @ORM\OneToMany(targetEntity="Project", mappedBy="project", cascade={"persist"})
+	 * @var Collection<int, Project>
+	 * @ORM\OneToMany(targetEntity="Project", mappedBy="projectManager")
 	 */
-	private PersistentCollection $managedProjects;
+	private Collection $managedProjects;
 
 	/**
 	 * @var Collection<int, ProjectAllocation>
-	 * @ORM\OneToMany(targetEntity="ProjectAllocation", mappedBy="project_allocation")
+	 * @ORM\OneToMany(targetEntity="ProjectAllocation", mappedBy="project")
 	 */
 	private Collection $projectAllocations;
+
+	/**
+	 * @var Collection<int, User>
+	 * @ORM\OneToMany(targetEntity="UserSuperiorUser", mappedBy="superiorUser")
+	 */
+	private Collection $superiors;
 
 	/**
 	 * @var Collection<int, User>
@@ -96,11 +102,6 @@ class User extends AbstractEntity
 	 */
 	private Collection $subordinates;
 
-	/**
-	 * @var Collection<int, User>
-	 * @ORM\OneToMany(targetEntity="UserSuperiorUser", mappedBy="superiorUser")
-	 */
-	private Collection $superiors;
 
 	public function __construct(string $firstname, string $lastname, string $email, string $login, string $passwordHash)
 	{
@@ -112,7 +113,6 @@ class User extends AbstractEntity
 
 		$this->role = self::ROLE_USER;
 
-		//$this->state = self::STATE_FRESH;
 		$this->projectAllocations = new ArrayCollection();
 	}
 

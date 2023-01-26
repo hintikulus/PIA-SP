@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
  */
 abstract class AbstractRepository extends EntityRepository
 {
-	/** @var array */
+	/** @var mixed[] */
 	protected const NOT_DELETED = ['deleted' => 0];
 
 	/**

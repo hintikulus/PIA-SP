@@ -16,8 +16,10 @@ use Nette\Utils\ArrayHash;
 
 class WorkspaceForm extends BaseComponent
 {
-	public $onSave;
-	public $onCancel;
+	/** @var callable[] */
+	public array $onSave;
+	/** @var callable[] */
+	public array $onCancel;
 
 	private ?int $id = null;
 
@@ -133,11 +135,16 @@ class WorkspaceForm extends BaseComponent
 		$this->onSave($this, $values);
 	}
 
-	public function handleCancel()
+	public function handleCancel(): void
 	{
 		$this->onCancel();
 	}
 
+	/**
+	 * Zpracování hodnot z formuláře pro pozdější použití
+	 * @param ArrayHash $values
+	 * @return mixed[]
+	 */
 	private function transformValues(ArrayHash $values): array
 	{
 		$transformed = [];

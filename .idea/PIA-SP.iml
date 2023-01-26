@@ -126,6 +126,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/contributte/translation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ublaboo/datagrid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/components/jquery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-iconv" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

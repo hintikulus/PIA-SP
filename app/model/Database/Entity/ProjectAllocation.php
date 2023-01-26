@@ -39,7 +39,7 @@ class ProjectAllocation
 
 	/**
 	 * @var Project
-	 * @ORM\ManyToOne(targetEntity="Project")
+	 * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectAllocations")
 	 * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
 	 */
 	private Project $project;
@@ -102,7 +102,7 @@ class ProjectAllocation
 
 	public function getAllocation(): float
 	{
-		return $this->allocation;
+		return $this->allocation ?? 0;
 	}
 
 	public function setAllocationFTE(float $xfte): void
@@ -112,7 +112,7 @@ class ProjectAllocation
 
 	public function getAllocationFTE(): float
 	{
-		return round($this->allocation / App::FTE, 2);
+		return round($this->allocation / App::FTE, 3);
 	}
 
 	public function setTimespanFrom(?DateTime $from): void
@@ -145,7 +145,7 @@ class ProjectAllocation
 		return $this->description;
 	}
 
-	public function setState(string $state)
+	public function setState(string $state): void
 	{
 		$this->state = $state;
 	}

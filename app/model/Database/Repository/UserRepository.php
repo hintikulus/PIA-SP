@@ -15,7 +15,7 @@ use Doctrine\ORM\QueryBuilder;
  */
 class UserRepository extends AbstractRepository
 {
-	public function findByNotDeleted()
+	public function findByNotDeleted(): QueryBuilder
 	{
 		return $this->createQueryBuilder('ur')
 			->andWhere('ur.deleted = 0')
@@ -27,6 +27,9 @@ class UserRepository extends AbstractRepository
 		return $this->findOneBy(['email' => $email, 'deleted' => 0]);
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public function findByNotDeletedPairs(): array
 	{
 		$qb = $this->createQueryBuilder('ur')

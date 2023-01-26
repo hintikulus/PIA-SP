@@ -8,11 +8,21 @@ use Doctrine\ORM\QueryBuilder;
 
 class ProjectFacade extends BaseFacade
 {
+	/**
+	 * Získání entity Projektu
+	 * @param int $id
+	 * @return Project|null
+	 */
 	public function get(int $id): ?Project
 	{
 		return $this->em->getProjectRepository()->find($id);
 	}
 
+	/**
+	 * Vytvoření nového projektu s daty z formuláře
+	 * @param mixed[] $data
+	 * @return ProjectFacadeResult
+	 */
 	public function create(array $data): ProjectFacadeResult
 	{
 		$user = $this->em->getUserRepository()->find($data['manager']);
@@ -32,6 +42,11 @@ class ProjectFacade extends BaseFacade
 		return $result;
 	}
 
+	/**
+	 * Editace projektu s daty z formuláře
+	 * @param mixed[] $data
+	 * @return ProjectFacadeResult
+	 */
 	public function edit(array $data): ProjectFacadeResult
 	{
 		$project = $this->get($data['id']);
@@ -59,11 +74,21 @@ class ProjectFacade extends BaseFacade
 		return $result;
 	}
 
+	/**
+	 * Získání seznamu uživatelů v poli pro select input,
+	 * kde klic je id a hodnota název uzivatele
+	 * @return string[]
+	 */
 	public function getProjectManagersPairs(): array
 	{
 		return $this->em->getUserRepository()->findByNotDeletedPairs();
 	}
 
+	/**
+	 * Získání instance QueryBuilder pro ziskani projektu, ktere managuje zadaný uživatel
+	 * @param int $userId
+	 * @return QueryBuilder
+	 */
 	public function getQueryBuilderProjectsByManager(int $userId): QueryBuilder
 	{
 		return $this->em->getProjectRepository()->findByProjectManager($userId);

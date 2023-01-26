@@ -19,7 +19,7 @@ trait TId
 	}
 
 
-	public function __clone()
+	public function __clone(): void
 	{
 		$this->id = null;
 	}

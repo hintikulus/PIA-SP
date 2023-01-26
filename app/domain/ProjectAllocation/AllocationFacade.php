@@ -20,16 +20,31 @@ class AllocationFacade
 		$this->em = $em;
 	}
 
+	/**
+	 * Získání enetity ProjectAllocation o zadaném identifikátoru
+	 * @param int $id
+	 * @return ProjectAllocation|null
+	 */
 	public function get(int $id): ?ProjectAllocation
 	{
 		return $this->em->getProjectAllocationRepository()->find($id);
 	}
 
+	/**
+	 * Vytvoří instanci dotazu pro výpis alokací zadaného uživatele
+	 * @param int $userId
+	 * @return QueryBuilder
+	 */
 	public function getQueryBuilderForMyAllocationGrid(int $userId): QueryBuilder
 	{
 		return $this->em->getProjectAllocationRepository()->findByUser($userId);
 	}
 
+	/**
+	 * Vytvoří instanci dotazu pro výpis alokací zadaného projektu
+	 * @param int $projectId
+	 * @return QueryBuilder
+	 */
 	public function getQueryBuilderForProjectAllocationGrid(int $projectId)
 	{
 		return $this->em->getProjectAllocationRepository()->findByNotDeleted()
@@ -37,6 +52,11 @@ class AllocationFacade
 			->setParameter("projectId", $projectId);
 	}
 
+	/**
+	 * Vytvoření nové alokace s daty z formuláře
+	 * @param mixed[] $data
+	 * @return AllocationFacadeResult
+	 */
 	public function create(array $data): AllocationFacadeResult
 	{
 		//Získání entity projektu
@@ -74,6 +94,11 @@ class AllocationFacade
 
 	}
 
+	/**
+	 * Úprava alokace na základě dat z formuláře
+	 * @param mixed[] $data
+	 * @return AllocationFacadeResult
+	 */
 	public function edit(array $data): AllocationFacadeResult
 	{
 		$allocation = $this->em->getProjectAllocationRepository()->find($data['allocation_id']);
@@ -95,6 +120,11 @@ class AllocationFacade
 		return new AllocationFacadeResult();
 	}
 
+	/**
+	 * Odstranění alokace o zadaném identifikátoru
+	 * @param int $id
+	 * @return AllocationFacadeResult
+	 */
 	public function delete(int $id): AllocationFacadeResult
 	{
 		$allocation = $this->get($id);
@@ -112,6 +142,11 @@ class AllocationFacade
 		return new AllocationFacadeResult();
 	}
 
+	/**
+	 * Získání agregovaných dat alokací ze zadaného dotazu
+	 * @param QueryBuilder $qb
+	 * @return mixed[]
+	 */
 	public static function getAggregationData(QueryBuilder $qb): array
 	{
 		$result = $qb->select('SUM(ar.allocation) as allocation_sum')
@@ -125,15 +160,14 @@ class AllocationFacade
 		];
 	}
 
+	/**
+	 * Získání dotazu pro získání uživatelů pro vytváření nové alokace
+	 * @param int $projectId
+	 * @return QueryBuilder
+	 */
 	public function getQueryBuilderForUserChooseAllocationGrid(int $projectId): QueryBuilder
 	{
 		$qb = $this->em->getUserRepository()->findByNotDeleted();
-
-		//$qb->addSelect('');
-		//$qb->select('(SELECT COUNT(alr.id) FROM ' . ProjectAllocation::class . ' alr WHERE alr.user = ur.id) AS allocation_sum');
-		//$qb->addSelect('(SELECT SUM(par.allocation) FROM ' . ProjectAllocation::class. ' par WHERE par.user = 1 AND par.state = :state AND par.deleted = 0) AS allocation_sum');
-		//$qb->setParameter("state", ProjectAllocation::STATE_ACTIVE);
-		//$qb->setParameter("now", new DateTime());
 		$qb->leftJoin(ProjectAllocation::class, "par", Join::WITH, "par.user = ur.id");
 		$qb->groupBy('ur.id');
 		$qb->addSelect('SUM(par.allocation) AS allocation_sum');
@@ -141,6 +175,11 @@ class AllocationFacade
 		return $qb;
 	}
 
+	/**
+	 * Vytvoření dotazu pro získání uživatelů, kteří nemají přiřazený zadaný projekt.
+	 * @param int $projectId
+	 * @return QueryBuilder
+	 */
 	public function findByNotProject(int $projectId): QueryBuilder {
 		$qb = $this->em->getUserRepository()->findByNotDeleted()
 		->addSelect('SUM(par.allocation) AS allocation_sum');
@@ -152,6 +191,11 @@ class AllocationFacade
 		return $qb;
 	}
 
+	/**
+	 * Získá součet všech alokací zadaného uživatele
+	 * @param int $userId
+	 * @return float
+	 */
 	public function getUserAllocationSum(int $userId): float
 	{
 		return $this->em->getProjectAllocationRepository()
@@ -162,11 +206,21 @@ class AllocationFacade
 
 	}
 
+	/**
+	 * Převod velikosti alokace z hodin/týdně na násobek FTE
+	 * @param float $hours
+	 * @return float
+	 */
 	public static function convertHoursToFTE(float $hours)
 	{
 		return round($hours / App::FTE, 2);
 	}
 
+	/**
+	 * Převod velikosti alokace z násobnku FTE na hodiny týdně
+	 * @param float $xfte
+	 * @return float
+	 */
 	public static function convertFTEToHours(float $xfte)
 	{
 		return round($xfte * App::FTE, 2);
