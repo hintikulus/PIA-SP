@@ -5,6 +5,7 @@ namespace App\Model\Database\Entity;
 use App\Model\Database\Entity\Attributes\TDeleted;
 use App\Model\Database\Entity\Attributes\TId;
 use App\Model\Security\Identity;
+use App\Model\Security\Passwords;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
