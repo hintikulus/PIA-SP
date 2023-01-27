@@ -74,7 +74,7 @@ class BaseGrid extends DataGrid
 
 						// Nadchazejici
 						if ($currentDatetime < $projectAllocation->getTimespanFrom()) {
-							$option["class"] = "fas fa-callendar-alt text-success";
+							$option["class"] = "fas fa-calendar-check text-success";
 							$option["data-bs-title"] = "Naplánované";
 						}
 
@@ -119,15 +119,30 @@ class BaseGrid extends DataGrid
 	 * @return void
 	 * @throws \Ublaboo\DataGrid\Exception\DataGridException
 	 */
-	public function addAggregationRow(): void
+	public function addAggregationRow(string $labelColumnName): void
 	{
 		$this->setMultipleAggregationFunction(
-			new class implements IMultipleAggregationFunction {
+			new class($labelColumnName) implements IMultipleAggregationFunction {
+
+				/** @var string */
+				private string $labelColumnName;
+
 				/** @var float */
 				private float $projectAllocationSum = 0;
 
 				/** @var float */
 				private float $projectAllocationFTESum = 0;
+
+				/** @var float */
+				private float $projectAllocationActiveSum = 0;
+
+				/** @var float */
+				private float $projectAllocationFTEActiveSum = 0;
+
+				public function __construct($labelColumnName)
+				{
+					$this->labelColumnName = $labelColumnName;
+				}
 
 				public function getFilterDataType(): string
 				{
@@ -146,15 +161,34 @@ class BaseGrid extends DataGrid
 					$aggregationData = AllocationFacade::getAggregationData($qb);
 					$this->projectAllocationSum = $aggregationData['allocation_sum'];
 					$this->projectAllocationFTESum = $aggregationData['allocationFTE_sum'];
+					$this->projectAllocationActiveSum = $aggregationData['allocation_active_sum'];
+					$this->projectAllocationFTEActiveSum = $aggregationData['allocationFTE_active_sum'];
 				}
+
 				public function renderResult(string $key): string
 				{
+					if ($key === $this->labelColumnName) {
+						$div = Html::el('div');
+						$div->addHtml(Html::el('span')->setHtml('Celkem'));
+						$div->addHtml(Html::el('br'));
+						$div->addHtml(Html::el('span')->setHtml('Celkem (aktivní)'));
+						return $div;
+					}
+
 					if ($key === 'allocation') {
-						return 'Σ: ' . $this->projectAllocationSum . " h";
+						$div = Html::el('div');
+						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationSum . ' h'));
+						$div->addHtml(Html::el('br'));
+						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationActiveSum . ' h'));
+						return $div;
 					}
 
 					if ($key === 'allocation_fte') {
-						return 'Σ: ' . $this->projectAllocationFTESum . " FTE";
+						$div = Html::el('div');
+						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationFTESum . ' FTE'));
+						$div->addHtml(Html::el('br'));
+						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationFTEActiveSum . ' h'));
+						return $div;
 					}
 
 					return '';

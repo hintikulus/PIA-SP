@@ -117,7 +117,7 @@ class ProjectUserAllocationGrid extends BaseComponent
 			;
 		}
 
-		$grid->addAggregationRow();
+		$grid->addAggregationRow('name');
 
 		return $grid;
 	}

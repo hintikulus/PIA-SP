@@ -66,7 +66,7 @@ class UserAllocationGrid extends BaseComponent
 
 		$grid->addColumnAllocationStatus('state', $translator->translate('attributes.state'));
 
-		$grid->addAggregationRow();
+		$grid->addAggregationRow('project');
 
 		return $grid;
 	}

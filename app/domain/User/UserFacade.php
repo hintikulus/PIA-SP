@@ -3,9 +3,7 @@
 namespace App\Domain\User;
 
 use App\Domain\Base\BaseFacade;
-use App\Domain\Base\BaseFacadeResult;
 use App\Model\Database\Entity\User;
-use App\Model\Database\EntityManager;
 
 class UserFacade extends BaseFacade
 {
@@ -16,6 +14,16 @@ class UserFacade extends BaseFacade
 	 */
 	public function get(int $id): ?User {
 		return $this->em->getUserRepository()->find($id);
+	}
+
+	/**
+	 * Vrátí entitu uživatele dle zadané emailové adresy
+	 * @param string $email
+	 * @return User|null
+	 */
+	public function getUserByEmail(string $email): ?User
+	{
+		return $this->em->getUserRepository()->findOneByEmail($email);
 	}
 
 }

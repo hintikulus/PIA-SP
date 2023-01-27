@@ -147,16 +147,26 @@ class AllocationFacade
 	 * @param QueryBuilder $qb
 	 * @return mixed[]
 	 */
-	public static function getAggregationData(QueryBuilder $qb): array
+	public static function getAggregationData(QueryBuilder $queryBuilder): array
 	{
+		$qb = clone $queryBuilder;
 		$result = $qb->select('SUM(ar.allocation) as allocation_sum')
 			->getQuery()->getArrayResult()
 		;
 		$sum = $result[0]['allocation_sum'];
 
+		$result = $qb->select('SUM(ar.allocation) as allocation_sum')
+			->andWhere('ar.state = :state')->andWhere('(ar.timespan_to IS NULL OR ar.timespan_to > :now)')
+			->setParameter('state', ProjectAllocation::STATE_ACTIVE)
+			->setParameter('now', new \Nette\Utils\DateTime())
+			->getQuery()->getArrayResult();
+		$sumActive = $result[0]['allocation_sum'];
+
 		return [
 			'allocation_sum'    => round($sum, 2),
 			'allocationFTE_sum' => round($sum / App::FTE, 2),
+			'allocation_active_sum'    => round($sumActive, 2),
+			'allocationFTE_active_sum' => round($sumActive / App::FTE, 2),
 		];
 	}
 

@@ -22,6 +22,11 @@ class UserRepository extends AbstractRepository
 		;
 	}
 
+	/**
+	 * Nalezení uživatele se zadanou emailovou adresou
+	 * @param string $email
+	 * @return User|null
+	 */
 	public function findOneByEmail(string $email): ?User
 	{
 		return $this->findOneBy(['email' => $email, 'deleted' => 0]);

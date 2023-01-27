@@ -487,6 +487,7 @@
 
 	{foreach $columns as $key => $column}
 		{var $td = $column->getElementForRender('td', $key)}
+		{do $td->class[] = 'px-4 border-0'}
 
 		{$td->startTag()|noescape}
 			{if $aggregationFunctions}
