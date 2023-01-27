@@ -116,6 +116,7 @@ class BaseGrid extends DataGrid
 
 	/**
 	 * Přidá do gridu řádek s agregačními funkcemi pro alokace
+	 * @param string $labelColumnName
 	 * @return void
 	 * @throws \Ublaboo\DataGrid\Exception\DataGridException
 	 */
@@ -139,7 +140,7 @@ class BaseGrid extends DataGrid
 				/** @var float */
 				private float $projectAllocationFTEActiveSum = 0;
 
-				public function __construct($labelColumnName)
+				public function __construct(string $labelColumnName)
 				{
 					$this->labelColumnName = $labelColumnName;
 				}
@@ -155,8 +156,6 @@ class BaseGrid extends DataGrid
 				 */
 				public function processDataSource($dataSource): void
 				{
-					bdump($dataSource);
-					/** @var QueryBuilder $qb */
 					$qb = clone $dataSource;
 					$aggregationData = AllocationFacade::getAggregationData($qb);
 					$this->projectAllocationSum = $aggregationData['allocation_sum'];
