@@ -35,8 +35,6 @@ class AllocationUserChooseGrid extends BaseComponent
 		$grid->setRefreshUrl(false);
 		$grid->setRememberState(false);
 
-
-		bdump($this->allocationFacade->getQueryBuilderForUserChooseAllocationGrid($this->projectId)->getQuery()->getArrayResult());
 		$grid->setDataSource($this->allocationFacade->getQueryBuilderForUserChooseAllocationGrid($this->projectId));
 
 		$grid->addColumnNumber('id', "#");

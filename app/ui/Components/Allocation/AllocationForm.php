@@ -62,7 +62,8 @@ class AllocationForm extends BaseComponent
 		{
 			$allocation = $this->allocationFacade->get($this->allocationId);
 
-			if($allocation !== null) {
+			if ($allocation !== null)
+			{
 				$this->projectId = $allocation->getProject()->getId();
 			}
 		}
@@ -93,14 +94,15 @@ class AllocationForm extends BaseComponent
 					'to_switch'       => $allocation->getTimespanTo() != null,
 					'state'           => ProjectAllocation::STATES_IDS[$allocation->getState()],
 					'description'     => $allocation->getDescription(),
+					'user_id'         => $allocation->getUser()->getId(),
 				];
 
-				if($allocation->getTimespanFrom() !== null)
+				if ($allocation->getTimespanFrom() !== null)
 				{
 					$defaults['timespan_from'] = DateTime::from($allocation->getTimespanFrom());
 				}
 
-				if($allocation->getTimespanTo() !== null)
+				if ($allocation->getTimespanTo() !== null)
 				{
 					$defaults['timespan_to'] = DateTime::from($allocation->getTimespanTo());
 				}
@@ -120,6 +122,7 @@ class AllocationForm extends BaseComponent
 			$defaults = [
 				'project_name' => $project?->getName(),
 				'user_name'    => $user?->getFullname(),
+				'user_id'      => $this->userId,
 			];
 
 			$this['form']->setDefaults($defaults);
@@ -140,7 +143,7 @@ class AllocationForm extends BaseComponent
 		{
 			$form->addHidden('project_id', $this->projectId);
 
-			$form->addHidden('user_id', $this->userId);
+			$form->addHidden('user_id');
 		}
 		else
 		{
@@ -217,12 +220,37 @@ class AllocationForm extends BaseComponent
 
 	public function onValidate(Form $form, ArrayHash $values): void
 	{
-		$this->transformValues($values);
+		$values = $this->transformValues($values);
 
 		if ($values['timespan_from'] >= $values['timespan_to'] && $values['to_switch'] == true)
 		{
 			$form->addError("Začátek nemůže být po konci");
 		}
+
+		bdump($values);
+		if($values['allocation_id'] !== null)
+		{
+			$allocation = $this->allocationFacade->get($this->allocationId);
+
+			if ($allocation !== null)
+			{
+				$userId = $allocation->getUser()->getId();
+			} else {
+				$form->addError('Vyskytla se chyba');
+				return;
+			}
+		} else {
+			$userId = $values['user_id'];
+		}
+
+		if ($values['state'] == ProjectAllocation::STATE_ACTIVE)
+		{
+			if ($this->allocationFacade->isUserAllocationExceededWith($userId, $values['allocation'], $values['timespan_from'], $values['timespan_to']))
+			{
+				$form->addError('Kapacita přetečena.');
+			}
+		}
+		//$form->addError('Hello there');
 	}
 
 	public function onSuccess(Form $form, ArrayHash $values): void
@@ -262,7 +290,6 @@ class AllocationForm extends BaseComponent
 	 */
 	public function transformValues(ArrayHash $values): array
 	{
-		bdump($values);
 		$transformed = [];
 
 		if (empty($values['project_id']))
@@ -315,6 +342,8 @@ class AllocationForm extends BaseComponent
 			$transformed['timespan_from'] = new DateTime($values['timespan_from']);
 		}
 
+		$transformed['to_switch'] = $values['to_switch'];
+
 		if ($values['to_switch'] === false)
 		{
 			$transformed['timespan_to'] = null;
@@ -335,7 +364,6 @@ class AllocationForm extends BaseComponent
 			$transformed['description'] = $values['description'];
 		}
 
-		bdump($transformed);
 		return $transformed;
 	}
 
