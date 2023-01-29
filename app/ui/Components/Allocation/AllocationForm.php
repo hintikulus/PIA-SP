@@ -141,6 +141,7 @@ class AllocationForm extends BaseComponent
 	public function createComponentForm(): BaseForm
 	{
 		$form = new BaseForm();
+		$translator = $this->translator->createPrefixedTranslator('admin.userAllocation');
 
 		if ($this->allocationId === null)
 		{
@@ -153,16 +154,16 @@ class AllocationForm extends BaseComponent
 			$form->addHidden('allocation_id', $this->allocationId);
 		}
 
-		$form->addText('project_name', "Název projektu")
+		$form->addText('project_name', $translator->translate('addForm.projectName'))
 			->setHtmlAttribute('readonly')
 		;
 
-		$form->addText('user_name', "Jméno spolupracovníka")
+		$form->addText('user_name', $translator->translate('addForm.employeeName'))
 			->setHtmlAttribute('readonly')
 		;
 
 		/** @var Checkbox $inputSwitchCheckbox */
-		$inputSwitchCheckbox = $form->addCheckbox('allocation_switch', "Zadat v hodinách týdně");
+		$inputSwitchCheckbox = $form->addCheckbox('allocation_switch', $translator->translate('addForm.enterInFTE'));
 
 		$inputSwitchCheckbox
 			->setDefaultValue(false)
@@ -172,25 +173,25 @@ class AllocationForm extends BaseComponent
 			->toggle("#switch-allocation-input")
 		;
 
-		$form->addFloat('allocation_fte', "Alokace (hodin týdně)")
+		$form->addFloat('allocation_fte', $translator->translate('addForm.allocationHoursLong'))
 			->addRule(Form::RANGE, "Úvazek musí být v rozsahu <0, 40>", [0, App::FTE])
 			->addConditionOn($inputSwitchCheckbox, Form::EQUAL, false)
 			->setRequired(true)
 		;
 
-		$form->addFloat('allocation_xfte', "Alokace (násobek FTE)")
+		$form->addFloat('allocation_xfte', $translator->translate('addForm.allocationFTELong'))
 			->addRule(Form::RANGE, "Úvazek musí být v rozsahu <0, 1>", [0, 1])
 			->addConditionOn($inputSwitchCheckbox, Form::EQUAL, true)
 			->setRequired(true)
 		;
 
-		$form->addDate("timespan_from", "Od")
+		$form->addDate("timespan_from", $translator->translate('attributes.timespan_from'))
 			->setDefaultValue(new DateTime())
 			->setHtmlAttribute('class', "form-control")
 			->setRequired()
 		;
 
-		$toSwitchCheckbox = $form->addCheckbox("to_switch", "Zadat konec");
+		$toSwitchCheckbox = $form->addCheckbox("to_switch", $translator->translate('addForm.enterEndTimespan'));
 		$toSwitchCheckbox->setDefaultValue(false)
 			->setRequired(false)
 			->addCondition(Form::FILLED)
@@ -198,7 +199,7 @@ class AllocationForm extends BaseComponent
 			->toggle("#timespan-to-switch")
 		;
 
-		$form->addDate("timespan_to", "Do")
+		$form->addDate("timespan_to", $translator->translate('attributes.timespan_to'))
 			->setDefaultValue(null)
 			->setHtmlAttribute('class', "form-control")
 			->addConditionOn($toSwitchCheckbox, Form::EQUAL, true)
@@ -210,11 +211,11 @@ class AllocationForm extends BaseComponent
 		{
 			$translatedStates[$key] = $this->translator->translate("admin.allocation.status." . $value);
 		}
-		$form->addSelect("state", "Status", $translatedStates);
+		$form->addSelect("state", $translator->translate('attributes.state'), $translatedStates);
 
-		$form->addTextArea("description", "Popis");
+		$form->addTextArea("description", $translator->translate('attributes.description'));
 
-		$form->addSubmit('submit', 'Uložit');
+		$form->addSubmit('submit', $this->translator->translate('base.saveButton'));
 
 		$form->onValidate[] = [$this, "onValidate"];
 		$form->onSuccess[] = [$this, 'onSuccess'];

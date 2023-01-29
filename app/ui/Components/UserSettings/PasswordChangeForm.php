@@ -29,9 +29,9 @@ class PasswordChangeForm extends BaseComponent
 	public function createComponentForm(): BaseForm
 	{
 		$form = new BaseForm();
-		$form->addPassword("old_password", "Staré heslo");//->setRequired();
-		$form->addPassword("new_password", "Nové heslo");//->setRequired();
-		$form->addPassword("new_password_again", "Nové heslo (znovu)");//->setRequired();
+		$form->addPassword("old_password", $this->translator->translate('admin.userSettings.changePassword.inputs.oldPassword'));//->setRequired();
+		$form->addPassword("new_password", $this->translator->translate('admin.userSettings.changePassword.inputs.newPassword'));//->setRequired();
+		$form->addPassword("new_password_again", $this->translator->translate('admin.userSettings.changePassword.inputs.newPasswordAgain'));//->setRequired();
 		$form->addSubmit("submit");
 
 		$form->onValidate[] = [$this, "onValidate"];

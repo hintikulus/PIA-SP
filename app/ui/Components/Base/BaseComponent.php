@@ -35,6 +35,7 @@ class BaseComponent extends Control
 
 		$this->getTemplate()->setFile($this->latteFile . '.latte');
 		$this->getTemplate()->componentName = $this->getComponentName();
+		bdump($this);
 		$this->getTemplate()->render();
 	}
 

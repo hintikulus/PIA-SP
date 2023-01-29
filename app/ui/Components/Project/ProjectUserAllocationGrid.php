@@ -44,6 +44,7 @@ class ProjectUserAllocationGrid extends BaseComponent
 	public function createComponentGrid(): BaseGrid
 	{
 		$grid = new BaseGrid();
+		$grid->setTranslator($this->translator);
 
 		$grid->setDataSource(
 			$this->allocationFacade->getQueryBuilderForProjectAllocationGrid($this->projectId)

@@ -16,6 +16,7 @@ class ProjectGrid extends BaseComponent
 	{
 		$translator = $this->translator->createPrefixedTranslator('admin.project');
 		$grid = new BaseGrid();
+		$grid->setTranslator($this->translator);
 		$grid->setDataSource($this->em->getProjectRepository()->createQueryBuilder("pr"));
 
 		$grid->addColumnText("name", $translator->translate('attributes.name'))

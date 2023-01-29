@@ -26,10 +26,11 @@ class ProjectManagerProjectsGrid extends BaseComponent
 	public function createComponentGrid(): BaseGrid
 	{
 		$grid = new BaseGrid();
+		$grid->setTranslator($this->translator);
 
 		$grid->setDataSource($this->projectFacade->getQueryBuilderProjectsByManager($this->user->id));
 
-		$grid->addColumnText('name', "Projekt");
+		$grid->addColumnText('name', $this->translator->translate('admin.userAllocation.attributes.project'));
 
 		$grid->addAction('view', '', 'Project:view')
 			->setIcon('eye')

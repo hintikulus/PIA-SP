@@ -38,6 +38,7 @@ class UserAllocationGrid extends BaseComponent
 		$translator = $this->translator->createPrefixedTranslator("admin.userAllocation");
 
 		$grid = new BaseGrid();
+		$grid->setTranslator($this->translator);
 
 		$grid->setDataSource($this->allocationFacade->getQueryBuilderForMyAllocationGrid($this->id ?? $this->user->getId()));
 

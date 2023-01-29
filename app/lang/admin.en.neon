@@ -1,6 +1,0 @@
-appName: "App Name"
-
-role:
-	secretariat: 'Secretariat'
-	department_manager: 'Department manager'
-	user: 'Employee'

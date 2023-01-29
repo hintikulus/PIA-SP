@@ -7,6 +7,7 @@ use App\Model\App;
 use App\Model\Database\Entity\ProjectAllocation;
 use App\Model\Utils\DateTime;
 use App\Model\Utils\Html;
+use Contributte\Translation\Translator;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -33,19 +34,21 @@ class BaseGrid extends DataGrid
 	public function addColumnAllocationDescription(string $key, string $name): ColumnText
 	{
 		return $this->addColumnText($key, $name)
-			->setRenderer(function (ProjectAllocation $projectAllocation) {
-				if ($projectAllocation->getDescription() === null) {
+			->setRenderer(function(ProjectAllocation $projectAllocation) {
+				if ($projectAllocation->getDescription() === null)
+				{
 					return "-";
 				}
 
 				return Html::el("i", [
-					"class" => "fas fa-info-circle",
-					"data-bs-toggle" => "tooltip",
+					"class"             => "fas fa-info-circle",
+					"data-bs-toggle"    => "tooltip",
 					"data-bs-placement" => "top",
-					"data-bs-title" => $projectAllocation->getDescription(),
+					"data-bs-title"     => $projectAllocation->getDescription(),
 				]);
 			})
-			->setAlign('center');
+			->setAlign('center')
+		;
 	}
 
 	/**
@@ -57,31 +60,34 @@ class BaseGrid extends DataGrid
 	 */
 	public function addColumnAllocationStatus(string $key, string $name): ColumnText
 	{
-		return $this->addColumnText('state', "Status")
-			->setRenderer(function (ProjectAllocation $projectAllocation) {
+		return $this->addColumnText('state', $name)
+			->setRenderer(function(ProjectAllocation $projectAllocation) {
 				$state = $projectAllocation->getState();
 				$currentDatetime = new DateTime();
 				$option = [
-					"data-bs-toggle" => "tooltip",
+					"data-bs-toggle"    => "tooltip",
 					"data-bs-placement" => "top",
 				];
 
 				// Nastaveni zobrazeni ikonky stavu
-				switch ($state) {
+				switch ($state)
+				{
 					// Status je aktivni
 					case ProjectAllocation::STATE_ACTIVE:
 						// Status aktivní má podstavy
 
 						// Nadchazejici
-						if ($currentDatetime < $projectAllocation->getTimespanFrom()) {
+						if ($currentDatetime < $projectAllocation->getTimespanFrom())
+						{
 							$option["class"] = "fas fa-calendar-check text-success";
-							$option["data-bs-title"] = "Naplánované";
+							$option["data-bs-title"] = $this->translator->translate('admin.allocation.status.scheduled');
 						}
 
 						// Probehly (ve vysledku veden jako neaktivni)
-						if ($currentDatetime > $projectAllocation->getTimespanTo() && $projectAllocation->getTimespanTo() !== null) {
+						if ($currentDatetime > $projectAllocation->getTimespanTo() && $projectAllocation->getTimespanTo() !== null)
+						{
 							$option["class"] = "fas fa-history text-warning";
-							$option["data-bs-title"] = "Proběhlé";
+							$option["data-bs-title"] = $this->translator->translate('admin.allocation.status.past');
 						}
 
 						// Probihajici
@@ -89,21 +95,22 @@ class BaseGrid extends DataGrid
 							$currentDatetime >= $projectAllocation->getTimespanFrom()
 							&& ($currentDatetime <= $projectAllocation->getTimespanTo()
 								|| $projectAllocation->getTimespanTo() === null)
-						) {
+						)
+						{
 							$option["class"] = "fas fa-check text-success";
-							$option["data-bs-title"] = "Probíhající";
+							$option["data-bs-title"] = $this->translator->translate('admin.allocation.status.ongoing');
 						}
 
 						break;
 					// Status je veden jako draft
 					case ProjectAllocation::STATE_INACTIVE_DRAFT:
 						$option["class"] = "fas fa-drafting-compass text-secondary";
-						$option["data-bs-title"] = "Rozpracované";
+						$option["data-bs-title"] = $this->translator->translate('admin.allocation.status.draft');
 						break;
 					// Status je veden jako zrušený
 					case ProjectAllocation::STATE_INACTIVE_CANCELED:
 						$option["class"] = "fas fa-ban text-danger";
-						$option["data-bs-title"] = "Zrušené";
+						$option["data-bs-title"] = $this->translator->translate('admin.allocation.status.canceled');
 						break;
 					default:
 						break;
@@ -111,7 +118,8 @@ class BaseGrid extends DataGrid
 
 				return Html::el('i', $option);
 			})
-			->setAlign('center');
+			->setAlign('center')
+		;
 	}
 
 	/**
@@ -123,7 +131,10 @@ class BaseGrid extends DataGrid
 	public function addAggregationRow(string $labelColumnName): void
 	{
 		$this->setMultipleAggregationFunction(
-			new class($labelColumnName) implements IMultipleAggregationFunction {
+			new class($labelColumnName, $this->translator) implements IMultipleAggregationFunction {
+
+				/** @var Translator */
+				private Translator $translator;
 
 				/** @var string */
 				private string $labelColumnName;
@@ -140,9 +151,10 @@ class BaseGrid extends DataGrid
 				/** @var float */
 				private float $projectAllocationFTEActiveSum = 0;
 
-				public function __construct(string $labelColumnName)
+				public function __construct(string $labelColumnName, Translator $translator)
 				{
 					$this->labelColumnName = $labelColumnName;
+					$this->translator = $translator;
 				}
 
 				public function getFilterDataType(): string
@@ -166,27 +178,46 @@ class BaseGrid extends DataGrid
 
 				public function renderResult(string $key): string
 				{
-					if ($key === $this->labelColumnName) {
+					if ($key === $this->labelColumnName)
+					{
 						$div = Html::el('div');
-						$div->addHtml(Html::el('span')->setHtml('Celkem'));
+						$div->addHtml(Html::el('span')->setHtml($this->translator->translate('admin.baseGrid.total')));
 						$div->addHtml(Html::el('br'));
-						$div->addHtml(Html::el('span')->setHtml('Celkem (aktivní)'));
+						$div->addHtml(Html::el('span')->setHtml($this->translator->translate('admin.baseGrid.totalActive')));
 						return $div;
 					}
 
-					if ($key === 'allocation') {
+					if ($key === 'allocation')
+					{
 						$div = Html::el('div');
-						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationSum . ' h'));
+						$div->addHtml(
+							Html::el('span')->setHtml(
+								$this->translator->translate('admin.baseGrid.totalValueHours', ['value' => $this->projectAllocationSum])
+							)
+						);
 						$div->addHtml(Html::el('br'));
-						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationActiveSum . ' h'));
+						$div->addHtml(
+							Html::el('span')->setHtml(
+								$this->translator->translate('admin.baseGrid.totalValueHours', ['value' => $this->projectAllocationActiveSum])
+							)
+						);
 						return $div;
 					}
 
-					if ($key === 'allocation_fte') {
+					if ($key === 'allocation_fte')
+					{
 						$div = Html::el('div');
-						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationFTESum . ' FTE'));
+						$div->addHtml(
+							Html::el('span')->setHtml(
+								$this->translator->translate('admin.baseGrid.totalValueHours', ['value' => $this->projectAllocationFTESum])
+							)
+						);
 						$div->addHtml(Html::el('br'));
-						$div->addHtml(Html::el('span')->setHtml('Σ: ' . $this->projectAllocationFTEActiveSum . ' h'));
+						$div->addHtml(
+							Html::el('span')->setHtml(
+								$this->translator->translate('admin.baseGrid.totalValueHours', ['value' => $this->projectAllocationFTEActiveSum])
+							)
+						);
 						return $div;
 					}
 

@@ -32,21 +32,20 @@ class AllocationUserChooseGrid extends BaseComponent
 	public function createComponentGrid(): BaseGrid
 	{
 		$grid = new BaseGrid();
+		$grid->setTranslator($this->translator);
 		$grid->setRefreshUrl(false);
 		$grid->setRememberState(false);
 		$grid->setDataSource($this->allocationFacade->getQueryBuilderForUserChooseAllocationGrid($this->projectId));
 
-		$grid->addColumnNumber('id', "#");
-
-		$grid->addColumnText('lastname', 'Pracovník')
+		$grid->addColumnText('lastname', $this->translator->translate('admin.userAllocation.addForm.employee'))
 			->setRenderer(function(array $user) {
 				return $user[0]->getFullname();
 			})->setSortable()->setSort('ASC')
 		;
 
-		$grid->addFilterText('lastname', 'Pracovník');
+		$grid->addFilterText('lastname', $this->translator->translate('admin.userAllocation.addForm.employee'));
 
-		$grid->addColumnNumber('allocation_sum', 'Alokace (H/W)')
+		$grid->addColumnNumber('allocation_sum', $this->translator->translate('admin.userAllocation.addForm.allocationHours'))
 			->setRenderer(function(array $user) {
 				if ($user['allocation_sum'] === null)
 				{
@@ -56,7 +55,7 @@ class AllocationUserChooseGrid extends BaseComponent
 			})
 		;
 
-		$grid->addColumnNumber('allocation_sum_xfte', 'Alokace (FTE)')
+		$grid->addColumnNumber('allocation_sum_xfte', $this->translator->translate('admin.userAllocation.addForm.allocationFTE'))
 			->setRenderer(function(array $user) {
 				if ($user['allocation_sum'] === null)
 				{

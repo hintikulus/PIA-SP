@@ -17,7 +17,7 @@
 	{label allocation_xfte /}
 	<div class="form-check form-check-info text-left">
 		<input n:name="allocation_switch" class="form-check-input">
-		<label n:name="allocation_switch" class="form-check-label">Uvést v násobku FTE</label>
+		<label n:name="allocation_switch" class="form-check-label">{_admin.userAllocation.addForm.enterInFTE}</label>
 	</div>
 	<div class="mb-3">
 		<input n:name="allocation_fte" class="form-control" autofocus>
@@ -31,7 +31,7 @@
 
 	<div class="form-check form-check-info text-left">
 		<input n:name="to_switch" class="form-check-input">
-		<label n:name="to_switch" class="form-check-label">Uvést konec</label>
+		<label n:name="to_switch" class="form-check-label">{_admin.userAllocation.addForm.enterEndTimespan}</label>
 	</div>
 
 	{label timespan_to /}
@@ -51,10 +51,10 @@
 
 	<div class="row">
 		<div class="col-6 text-center">
-			<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Uložit</button>
+			<button n:name="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">{_admin.base.saveButton}</button>
 		</div>
 		<div class="col-6 text-center">
-			<a n:href="cancel!" class="btn btn-secondary w-100 mt-4 mb-0">Zrušit</a>
+			<a n:href="cancel!" class="btn btn-secondary w-100 mt-4 mb-0">{_admin.base.cancelButton}</a>
 		</div>
 	</div>
 </form>

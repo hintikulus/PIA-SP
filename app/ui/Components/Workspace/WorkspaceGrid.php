@@ -41,6 +41,7 @@ class WorkspaceGrid extends BaseComponent
 	{
 		$translator = $this->translator->createPrefixedTranslator("admin.workspace");
 		$grid = new BaseGrid();
+		$grid->setTranslator($this->translator);
 
 		$grid->setDataSource($this->workspaceFacade->getQueryBuilderForGrid());
 

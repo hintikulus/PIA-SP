@@ -8,24 +8,48 @@ base:
 	saveButton: 'Uložit'
 	show: 'Zobrazit'
 
+baseGrid:
+	total: 'Celkem'
+	totalActive: 'Celkem (aktivní)'
+	totalValueHours: 'Σ: %value% h'
+	totalValueFTE: 'Σ: %value% FTE'
+
+menuSeparator:
+	superior: 'Nadřízený'
+	secretariat: 'Sekretariát'
+
 role:
 	secretariat: 'Sekretariát'
 	department_manager: 'Vedoucí oddělení'
 	superior: 'Nadřízený'
-	user: 'Zaměstnanec'
+	user: 'Pracovník'
 
 allocation:
 	status:
 		active: 'Aktivní'
 		draft: 'Rozpracované'
 		canceled: 'Zrušené'
+		scheduled: 'Naplánované'
+		ongoing: 'Probíhající'
+		past: 'Proběhlé'
 
 user:
 	menu: 'Lidé'
 
+	attributes:
+		login: 'Login'
+		firstname: 'Křestní jméno'
+		lastname: 'Příjmení'
+		email: 'Email'
+		role: 'Role'
+
 userAllocation:
 	title: 'Moje alokace'
 	title_multiple: 'Moje alokace'
+
+	my_allocation_menu:  'Moje alokace'
+	my_allocation_title: 'Moje alokace'
+	my_projected_title: 'Mnou projektované projekty'
 
 	attributes:
 		project: 'Projekt'
@@ -37,8 +61,22 @@ userAllocation:
 		state: 'Status'
 
 	form:
+		title_choose: 'Přidat alokaci - Vyberte pracovníka'
 		title_add: 'Přidat alokaci'
 		title_edit: 'Upravit alokaci'
+
+	addForm:
+		projectName: 'Název projektu'
+		employeeName: 'Jméno spolupracovníka'
+		employee: 'Pracovník'
+		enterInFTE: Uvést v násobku FTE'
+		enterEndTimespan: 'Uvést konec'
+		allocationHoursLong: 'Alokace (hodin týdně)'
+		allocationHours: 'Alokace (H/W)'
+		allocationFTE: 'Alokace (FTE)'
+		allocationFTELong: 'Alokace (násobek FTE)'
+		allocationActiveHours: 'Akt. alokace (H/W)'
+		allocationActiveFTE: 'Akt. alokace (FTE)'
 
 project:
 	menu: 'Projekty'
@@ -63,6 +101,23 @@ project:
 		placeholders:
 			name: 'Název projektu'
 			project_manager: 'Vyberte vedoucího'
+
+superior:
+	menu: 'Nadřízený'
+
+	title: 'Podřízení pracovníci'
+	employee: 'Pracovníci'
+
+	grid_action:
+		show: 'Zobrazit'
+
+userSettings:
+	changePassword:
+		title: 'Změna hesla'
+		inputs:
+			oldPassword: 'Aktuální heslo'
+			newPassword: 'Nové heslo'
+			newPasswordAgain: 'Nové heslo (znovu)'
 
 workspace:
 	menu: 'Oddělení'
