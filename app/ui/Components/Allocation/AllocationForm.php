@@ -12,6 +12,7 @@ use App\Model\Database\EntityManager;
 use App\Model\Utils\DateTime;
 use App\UI\Components\Base\BaseComponent;
 use App\UI\Form\BaseForm;
+use Cassandra\Date;
 use Contributte\Translation\Translator;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Forms\Form;
@@ -99,12 +100,14 @@ class AllocationForm extends BaseComponent
 
 				if ($allocation->getTimespanFrom() !== null)
 				{
-					$defaults['timespan_from'] = DateTime::from($allocation->getTimespanFrom());
+					$defaults['timespan_from'] = DateTime::from($allocation->getTimespanFrom())->format(App::DATE_FORMAT_INPUT);
 				}
 
 				if ($allocation->getTimespanTo() !== null)
 				{
-					$defaults['timespan_to'] = DateTime::from($allocation->getTimespanTo());
+					$defaults['timespan_to'] = DateTime::from($allocation->getTimespanToTransformed())
+						->format(App::DATE_FORMAT_INPUT)
+					;
 				}
 
 				$this['form']->setDefaults($defaults);
@@ -181,9 +184,10 @@ class AllocationForm extends BaseComponent
 			->setRequired(true)
 		;
 
-		$form->addDatetime("timespan_from", "Od")
+		$form->addDate("timespan_from", "Od")
 			->setDefaultValue(new DateTime())
 			->setHtmlAttribute('class', "form-control")
+			->setRequired()
 		;
 
 		$toSwitchCheckbox = $form->addCheckbox("to_switch", "Zadat konec");
@@ -194,7 +198,7 @@ class AllocationForm extends BaseComponent
 			->toggle("#timespan-to-switch")
 		;
 
-		$form->addDatetime("timespan_to", "Do")
+		$form->addDate("timespan_to", "Do")
 			->setDefaultValue(null)
 			->setHtmlAttribute('class', "form-control")
 			->addConditionOn($toSwitchCheckbox, Form::EQUAL, true)
@@ -220,6 +224,7 @@ class AllocationForm extends BaseComponent
 
 	public function onValidate(Form $form, ArrayHash $values): void
 	{
+		bdump($values);
 		$values = $this->transformValues($values);
 
 		if ($values['timespan_from'] >= $values['timespan_to'] && $values['to_switch'] == true)
@@ -227,19 +232,22 @@ class AllocationForm extends BaseComponent
 			$form->addError("Začátek nemůže být po konci");
 		}
 
-		bdump($values);
-		if($values['allocation_id'] !== null)
+		if ($values['allocation_id'] !== null)
 		{
 			$allocation = $this->allocationFacade->get($this->allocationId);
 
 			if ($allocation !== null)
 			{
 				$userId = $allocation->getUser()->getId();
-			} else {
+			}
+			else
+			{
 				$form->addError('Vyskytla se chyba');
 				return;
 			}
-		} else {
+		}
+		else
+		{
 			$userId = $values['user_id'];
 		}
 
@@ -350,7 +358,11 @@ class AllocationForm extends BaseComponent
 		}
 		else
 		{
-			$transformed['timespan_to'] = new DateTime($values['timespan_to']);
+			$timespanTo = new DateTime($values['timespan_to']);
+			$timespanTo->modify('+ 1 day');
+			$transformed['timespan_to'] = $timespanTo;
+
+			bdump($timespanTo, "AFTER");
 		}
 
 		$transformed['state'] = ProjectAllocation::STATES[$values['state']];

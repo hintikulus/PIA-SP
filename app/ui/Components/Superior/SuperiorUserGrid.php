@@ -35,6 +35,8 @@ class SuperiorUserGrid extends BaseComponent
 			})
 		;
 
+		$grid->addAction('user', ' Zobrazit', ':user');
+
 		return $grid;
 	}
 }

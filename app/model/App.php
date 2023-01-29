@@ -15,4 +15,5 @@ final class App
 	public const DATE_FORMAT = "j. n. Y";
 	public const DATE_SHORT_FORMAT = "j. n.";
 	public const TIME_FORMAT = "H:i";
+	public const DATE_FORMAT_INPUT = 'Y-m-d';
 }

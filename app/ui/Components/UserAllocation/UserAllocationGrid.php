@@ -22,9 +22,9 @@ class UserAllocationGrid extends BaseComponent
 
 	public function __construct(
 		AllocationFacade $allocationFacade,
-		User $user,
-		Translator $translator,
-		?int $id,
+		User             $user,
+		Translator       $translator,
+		?int             $id,
 	)
 	{
 		$this->allocationFacade = $allocationFacade;
@@ -49,7 +49,11 @@ class UserAllocationGrid extends BaseComponent
 
 		$grid->addColumnDateTime("timespan_from", $translator->translate('attributes.timespan_from'));
 
-		$grid->addColumnDateTime("timespan_to", $translator->translate('attributes.timespan_to'));
+		$grid->addColumnDateTime("timespan_to", $translator->translate('attributes.timespan_to'))
+			->setRenderer(function(ProjectAllocation $allocation) {
+				return $allocation->getTimespanToTransformed()?->format(App::DATE_FORMAT) ?? '-';
+			})
+		;
 
 		$grid->addColumnNumber('allocation', $translator->translate('attributes.allocation'))
 			->setFormat(2, ',', ' ')

@@ -135,6 +135,18 @@ class ProjectAllocation
 		return $this->timespan_to;
 	}
 
+	public function getTimespanToTransformed(): ?DateTime
+	{
+		if($this->timespan_to === null)
+		{
+			return null;
+		}
+
+		$transformed = clone $this->timespan_to;
+
+		return $transformed->modify('- 1 day');
+	}
+
 	public function setDescription(?string $description): void
 	{
 		$this->description = $description;

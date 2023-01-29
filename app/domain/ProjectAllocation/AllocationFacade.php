@@ -63,6 +63,7 @@ class AllocationFacade
 	 */
 	public function create(array $data): AllocationFacadeResult
 	{
+		bdump($data);
 		//Získání entity projektu
 		$project = $this->em->getProjectRepository()->find($data['project_id']);
 
@@ -111,6 +112,7 @@ class AllocationFacade
 	 */
 	public function edit(array $data): AllocationFacadeResult
 	{
+		bdump($data);
 		$allocation = $this->em->getProjectAllocationRepository()->find($data['allocation_id']);
 
 		if ($allocation == null)

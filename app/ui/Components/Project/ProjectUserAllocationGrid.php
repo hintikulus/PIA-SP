@@ -66,15 +66,15 @@ class ProjectUserAllocationGrid extends BaseComponent
 			->setFormat(2, ',', ' ')
 		;
 
-		$grid->addColumnDateTime("from", "Od")
+		$grid->addColumnDateTime("timespan_from", "Od")
 			->setRenderer(function(ProjectAllocation $projectAllocation) {
 				return $projectAllocation->getTimespanFrom()?->format(App::DATE_FORMAT) ?? "-";
 			})
 		;
 
-		$grid->addColumnDateTime("to", "Do")
-			->setRenderer(function(ProjectAllocation $projectAllocation) {
-				return $projectAllocation->getTimespanTo()?->format(App::DATE_FORMAT) ?? "-";
+		$grid->addColumnDateTime("timespan_to", "Do")
+			->setRenderer(function(ProjectAllocation $allocation) {
+				return $allocation->getTimespanToTransformed()?->format(App::DATE_FORMAT) ?? '-';
 			})
 		;
 

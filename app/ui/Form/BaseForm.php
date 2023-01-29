@@ -41,4 +41,15 @@ class BaseForm extends Form
 		return $input;
 	}
 
+	public function addDate(string $name, ?string $label = null): TextInput
+	{
+		$input = self::addText($name, $label);
+		$input->setHtmlAttribute('type', 'date')
+			->addCondition(self::FILLED)
+			->addRule(self::MAX_LENGTH, null, 255)
+		;
+
+		return $input;
+	}
+
 }
